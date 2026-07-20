@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MEHR Partners — Services</title>
+<style>
+  :root{
+    --ink:#0E1C2B; --paper:#F6F4EF; --slate:#5A6875; --line:#D8D3C8;
+    --gold:#B08D4F; --deep:#132A3E; --sel:#F0EBE0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:Georgia,'Times New Roman',serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 32px}
+  .mono{font-family:'Courier New',monospace;letter-spacing:.14em;text-transform:uppercase;font-size:.7rem;color:var(--slate)}
+  a{color:inherit}
+
+  header{padding:38px 0 0}
+  .top{display:flex;justify-content:space-between;align-items:baseline;max-width:1000px;margin:0 auto;padding:0 32px}
+  .word{font-size:1.15rem;letter-spacing:.42em;font-weight:400;padding-left:.42em;text-decoration:none;color:var(--ink)}
+  nav a{color:var(--slate);text-decoration:none;margin-left:26px;font-family:'Courier New',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase}
+  nav a:hover{color:var(--ink)}
+  @media(max-width:640px){nav{display:none}}
+
+  .hero{padding:96px 0 60px;border-bottom:1px solid var(--line)}
+  .hero .eyebrow{margin-bottom:30px}
+  .hero h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.15;font-weight:400;letter-spacing:-.01em;max-width:18ch}
+  .hero h1 em{font-style:italic;color:var(--gold)}
+  .hero .sub{margin-top:30px;max-width:60ch;color:var(--slate);font-size:1.06rem}
+  .hint{margin-top:26px;font-family:'Courier New',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+
+  section{padding:64px 0;border-bottom:1px solid var(--line)}
+  .lead-label{margin-bottom:12px}
+  h2{font-size:1.5rem;font-weight:400;letter-spacing:-.01em;margin-bottom:10px;max-width:28ch}
+  .tier-note{color:var(--slate);font-size:1rem;max-width:60ch;margin-bottom:30px}
+  .tier-label{margin-top:8px;margin-bottom:20px;color:var(--gold);letter-spacing:.14em}
+
+  /* service cards */
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:720px){.cards{grid-template-columns:1fr}}
+  .card{position:relative;border:1px solid var(--line);background:#FBFAF6;padding:26px 26px 24px;cursor:pointer;
+    transition:border-color .2s ease,background .2s ease,transform .2s ease;display:flex;flex-direction:column}
+  .card:hover{border-color:var(--gold);transform:translateY(-2px)}
+  .card.selected{border-color:var(--gold);background:var(--sel);box-shadow:inset 3px 0 0 var(--gold)}
+  .card .code{font-family:'Courier New',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+  .card h3{font-size:1.14rem;font-weight:400;letter-spacing:-.005em;margin-bottom:8px;line-height:1.25}
+  .card p{color:var(--slate);font-size:.95rem;max-width:44ch;margin-bottom:14px;flex:1}
+  .card .model{font-family:'Courier New',monospace;font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:#2B3844;border-top:1px solid var(--line);padding-top:12px}
+  .tick{position:absolute;top:20px;right:22px;width:22px;height:22px;border-radius:50%;border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-family:'Courier New',monospace;font-size:.8rem;color:transparent;transition:all .2s ease}
+  .card.selected .tick{background:var(--gold);border-color:var(--gold);color:#1a1205}
+
+  /* selection tray + contact */
+  .start{background:var(--deep);color:#EAF0F6;border-bottom:none}
+  .start h2{color:#fff}
+  .start .lead-label{color:#8FA3B5}
+  .tray{margin:22px 0 8px;min-height:30px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  .tray .empty{color:#8FA3B5;font-style:italic;font-size:.98rem}
+  .chip{display:inline-flex;align-items:center;gap:8px;background:rgba(176,141,79,.16);border:1px solid var(--gold);
+    color:#E9DCC2;padding:7px 12px;font-family:'Courier New',monospace;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase}
+  .chip button{background:none;border:none;color:#E9DCC2;cursor:pointer;font-size:.9rem;line-height:1;padding:0}
+  .start p.body{max-width:58ch;color:#C5D2DE;margin:16px 0 26px}
+  .cta-primary{display:inline-block;background:var(--gold);color:#1a1205;text-decoration:none;padding:15px 30px;
+    font-family:'Courier New',monospace;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;font-weight:bold;
+    transition:background .25s ease,transform .25s ease;border:none;cursor:pointer}
+  .cta-primary:hover{background:#c9a25c;transform:translateY(-1px)}
+  .cta-row{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+  .cta-secondary{color:#EAF0F6;text-decoration:none;font-family:'Courier New',monospace;font-size:.78rem;
+    letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--gold);padding-bottom:3px}
+  .cta-secondary:hover{color:var(--gold)}
+
+  .note{font-family:Georgia,serif;font-style:italic;color:var(--slate);font-size:.85rem;max-width:70ch;margin-top:16px}
+  footer{padding:40px 0 60px}
+  .foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;align-items:baseline}
+  .foot .mono{color:var(--slate)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="top">
+    <a href="mehr_vc_site.html" class="word">MEHR</a>
+    <nav>
+      <a href="#healthcare">Healthcare</a>
+      <a href="#crosssector">Cross-sector</a>
+      <a href="#capital">Capital partners</a>
+      <a href="#start">Start here</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="hero" style="border-bottom:1px solid var(--line)">
+    <div class="mono eyebrow">MEHR Partners — Services</div>
+    <h1>Choose where you need <em>operating judgment</em>.</h1>
+    <p class="sub">MEHR Partners is an operator-investor practice, led by founding partners Arman and Armin Amiri — twin PharmD operator-investors — and supported by a growing team. Select the engagements that fit your situation; we'll tell you honestly whether we're the right people for it.</p>
+    <div class="hint">Tap the services you're interested in → they'll appear under "Start here"</div>
+  </section>
+</div>
+
+<!-- HEALTHCARE CORE -->
+<div class="wrap">
+  <section id="healthcare">
+    <div class="mono lead-label">01 — Our deepest expertise</div>
+    <h2>Healthcare &amp; pharmacy</h2>
+    <p class="tier-note">Grounded in operating and turning around pharmacies within BENU, the Netherlands' largest chain — operator judgment, not a model review.</p>
+    <div class="cards" data-group="Healthcare">
+
+      <div class="card" data-code="P4" data-name="Healthcare-PE operational diligence &amp; value-creation">
+        <span class="tick">✓</span>
+        <div class="code">P4 · Healthcare-PE</div>
+        <h3>Operational diligence &amp; value-creation</h3>
+        <p>PharmD-led buy-side operational diligence and post-acquisition 100-day value creation for healthcare-services PE, sponsors, and pharmacy platforms. What's really broken, and what the fix costs.</p>
+        <div class="model">Project or portfolio retainer</div>
+      </div>
+
+      <div class="card" data-code="P5" data-name="EU pharmacy-platform entry">
+        <span class="tick">✓</span>
+        <div class="code">P5 · European entry</div>
+        <h3>EU pharmacy-platform entry</h3>
+        <p>Entry architecture, regulatory navigation, and the BIG-registered Dutch pharmacist — for telehealth, e-pharmacy, and DTC-health platforms entering Germany, Switzerland, and the wider EU. Where a licensed pharmacist is the requirement, not a preference.</p>
+        <div class="model">Project + oversight retainer</div>
+      </div>
+
+      <div class="card" data-code="P1" data-name="Company advisory — commercial execution">
+        <span class="tick">✓</span>
+        <div class="code">P1 · Company advisory</div>
+        <h3>Commercial execution</h3>
+        <p>Commercial strategy, go-to-market, pricing, and the commercial team — for funded healthcare companies stalled on the path from product to scalable revenue.</p>
+        <div class="model">Monthly advisory retainer</div>
+      </div>
+
+      <div class="card" data-code="P2" data-name="Investor-readiness &amp; fundraising prep">
+        <span class="tick">✓</span>
+        <div class="code">P2 · Investor-readiness</div>
+        <h3>Fundraising preparation</h3>
+        <p>Narrative, positioning, model inputs, materials, and target-investor strategy — so a funded company is genuinely raise-ready. Preparation work; we don't raise capital on your behalf.</p>
+        <div class="model">Scoped project or retainer</div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- CROSS-SECTOR -->
+<div class="wrap">
+  <section id="crosssector">
+    <div class="mono lead-label">02 — The capability travels</div>
+    <h2>Across sectors</h2>
+    <p class="tier-note">The same operator judgment — commercial execution, cross-border entry, turnaround — applies well beyond healthcare. We take on select engagements where our edge is real.</p>
+    <div class="cards" data-group="Cross-sector">
+
+      <div class="card" data-code="P3" data-name="US &amp; EU soft-landing / market access">
+        <span class="tick">✓</span>
+        <div class="code">P3 · Market access</div>
+        <h3>US &amp; EU soft-landing</h3>
+        <p>Two-way market entry: foreign companies landing in the United States, and companies entering Europe. Market-entry strategy, setup with counsel, and warm introductions to first customers, partners, and hires — including through our Silicon Valley network. We've made the move ourselves.</p>
+        <div class="model">Retainer or launch project</div>
+      </div>
+
+      <div class="card" data-code="P1x" data-name="Operational turnaround">
+        <span class="tick">✓</span>
+        <div class="code">Turnaround</div>
+        <h3>Operational turnaround</h3>
+        <p>Restructuring distressed operations, team and culture turnaround, and the systems underneath — for SMBs and portfolio companies that need to fix the operating engine.</p>
+        <div class="model">Project or interim retainer</div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- CAPITAL PARTNERS -->
+<div class="wrap">
+  <section id="capital">
+    <div class="mono lead-label">03 — For capital partners</div>
+    <h2>Family offices &amp; investors</h2>
+    <p class="tier-note">Operator depth most family offices don't keep in-house — provided as a service, for the work, independent of whether you invest.</p>
+    <div class="cards" data-group="Capital partners">
+
+      <div class="card" data-code="P6" data-name="Family-office dealflow, access &amp; diligence">
+        <span class="tick">✓</span>
+        <div class="code">P6 · Family office &amp; HNWIs</div>
+        <h3>Dealflow, access &amp; diligence</h3>
+        <p>Curated dealflow sourcing and screening, operational diligence on your targets, market intelligence, and curated access — for family offices and private investors with healthcare and cross-sector exposure. Retainer for the work; not a finder's fee.</p>
+        <div class="model">Monthly retainer</div>
+      </div>
+
+      <div class="card" data-code="P4b" data-name="Operational diligence for a single deal">
+        <span class="tick">✓</span>
+        <div class="code">Single-deal diligence</div>
+        <h3>Diligence on one target</h3>
+        <p>A focused operational read on a specific asset you're evaluating — the operator's view of the levers and the risks, before you commit.</p>
+        <div class="model">Fixed-fee project</div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- START HERE -->
+<div class="wrap">
+  <section id="start" class="start">
+    <div class="mono lead-label">04 — Start here</div>
+    <h2>Tell us where execution is stalling.</h2>
+    <div class="tray" id="tray">
+      <span class="empty" id="trayEmpty">No services selected yet — tap any card above, or just book a call.</span>
+    </div>
+    <p class="body">A short call — no pitch. Tell us the problem you're trying to move, and we'll tell you honestly whether we're the right people for it. If it's a fit, we'll often start with a one-page operational read on a live situation, so you can judge the work before committing to anything.</p>
+    <div class="cta-row">
+      <a class="cta-primary" id="bookBtn" href="https://calendly.com/mehr-advisory/new-meeting" target="_blank" rel="noopener">Book a short call →</a>
+      <a class="cta-secondary" id="emailBtn" href="mailto:partners@mehr.vc">Or email partners@mehr.vc</a>
+    </div>
+    <p class="note">MEHR Partners does not offer or solicit any securities or investment through this site, and is not a broker-dealer. Advisory and family-office engagements are provided for the work performed, independent of any investment or capital raised. Any investment activity is conducted privately, with counsel, under applicable exemptions.</p>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap foot">
+    <div class="mono">MEHR Partners · Founding partners Arman &amp; Armin Amiri</div>
+    <div class="mono">partners@mehr.vc</div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var selected = [];
+    var tray = document.getElementById('tray');
+    var trayEmpty = document.getElementById('trayEmpty');
+    var emailBtn = document.getElementById('emailBtn');
+    var cards = document.querySelectorAll('.card');
+
+    function decode(s){ var t=document.createElement('textarea'); t.innerHTML=s; return t.value; }
+
+    function render(){
+      // clear chips (keep empty msg element)
+      Array.prototype.slice.call(tray.querySelectorAll('.chip')).forEach(function(c){c.remove();});
+      if(selected.length===0){ trayEmpty.style.display=''; }
+      else {
+        trayEmpty.style.display='none';
+        selected.forEach(function(item){
+          var chip=document.createElement('span');
+          chip.className='chip';
+          chip.innerHTML='<span>'+item.name+'</span>';
+          var x=document.createElement('button'); x.setAttribute('aria-label','Remove'); x.textContent='×';
+          x.onclick=function(ev){ ev.stopPropagation(); toggle(item.code); };
+          chip.appendChild(x);
+          tray.appendChild(chip);
+        });
+      }
+      // update email subject/body with selection
+      var subject, body;
+      if(selected.length){
+        var names = selected.map(function(i){return decode(i.name);});
+        subject = 'MEHR Partners — interested in: ' + names.join('; ');
+        body = 'Hi Arman and Armin,%0D%0A%0D%0AWe are interested in the following:%0D%0A- ' +
+               names.join('%0D%0A- ') + '%0D%0A%0D%0AHere is where execution is stalling for us:%0D%0A%0D%0A';
+      } else {
+        subject = 'MEHR Partners — enquiry';
+        body = 'Hi Arman and Armin,%0D%0A%0D%0AHere is where execution is stalling for us:%0D%0A%0D%0A';
+      }
+      emailBtn.setAttribute('href','mailto:partners@mehr.vc?subject='+encodeURIComponent(subject)+'&body='+body);
+    }
+
+    function toggle(code){
+      var card = document.querySelector('.card[data-code="'+code+'"]');
+      var idx = selected.findIndex(function(i){return i.code===code;});
+      if(idx>-1){ selected.splice(idx,1); if(card) card.classList.remove('selected'); }
+      else {
+        selected.push({code:code, name: card.getAttribute('data-name')});
+        if(card) card.classList.add('selected');
+      }
+      render();
+    }
+
+    cards.forEach(function(card){
+      card.addEventListener('click', function(){ toggle(card.getAttribute('data-code')); });
+      card.setAttribute('tabindex','0');
+      card.setAttribute('role','button');
+      card.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(card.getAttribute('data-code')); }});
+    });
+
+    render();
+  })();
+</script>
+</body>
+</html>
