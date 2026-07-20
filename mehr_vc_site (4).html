@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MEHR</title>
+<style>
+  :root{
+    --ink:#0E1C2B;        /* near-black navy — primary text */
+    --paper:#F6F4EF;      /* warm off-white, but cool-leaning, not cream-cliché */
+    --slate:#5A6875;      /* muted secondary */
+    --line:#D8D3C8;       /* hairline */
+    --gold:#B08D4F;       /* restrained brass accent — used once or twice only */
+    --deep:#132A3E;       /* deep panel */
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:Georgia,'Times New Roman',serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:0 32px}
+  .mono{font-family:'Courier New',monospace;letter-spacing:.14em;text-transform:uppercase;font-size:.7rem;color:var(--slate)}
+
+  /* ---- top bar ---- */
+  header{padding:38px 0 0}
+  .top{display:flex;justify-content:space-between;align-items:baseline}
+  .word{font-size:1.15rem;letter-spacing:.42em;font-weight:400;padding-left:.42em}
+  nav a{color:var(--slate);text-decoration:none;margin-left:26px;font-family:'Courier New',monospace;
+    font-size:.7rem;letter-spacing:.12em;text-transform:uppercase}
+  nav a:hover{color:var(--ink)}
+  @media(max-width:640px){nav{display:none}}
+
+  /* ---- hero ---- */
+  .hero{padding:120px 0 96px;border-bottom:1px solid var(--line)}
+  .hero .eyebrow{margin-bottom:34px}
+  .hero h1{
+    font-size:clamp(2.1rem,5.2vw,3.5rem);line-height:1.14;font-weight:400;
+    letter-spacing:-.01em;max-width:15ch;
+  }
+  .hero h1 em{font-style:italic;color:var(--gold)}
+  .hero .sub{margin-top:34px;max-width:52ch;color:var(--slate);font-size:1.08rem}
+  .hero-cta{margin-top:46px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+  .cta-primary{
+    display:inline-block;background:var(--gold);color:#1a1205;text-decoration:none;
+    padding:15px 30px;font-family:'Courier New',monospace;font-size:.8rem;letter-spacing:.1em;
+    text-transform:uppercase;font-weight:bold;transition:background .25s ease,transform .25s ease;
+  }
+  .cta-primary:hover{background:#c9a25c;transform:translateY(-1px)}
+  .cta-aside{color:var(--slate);font-size:.95rem;max-width:30ch;font-style:italic}
+  .cta-secondary{display:inline-block;margin-left:20px;color:var(--ink);text-decoration:none;
+    font-family:'Courier New',monospace;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;
+    border-bottom:1px solid var(--gold);padding-bottom:3px;transition:color .2s ease}
+  .cta-secondary:hover{color:var(--gold)}
+  @media(max-width:640px){.cta-aside{max-width:100%}.cta-secondary{margin-left:0;display:block;margin-top:18px}}
+
+  /* ---- sections ---- */
+  section{padding:72px 0;border-bottom:1px solid var(--line)}
+  .lead-label{margin-bottom:26px}
+  h2{font-size:1.5rem;font-weight:400;letter-spacing:-.01em;margin-bottom:20px;max-width:24ch}
+  p.body{max-width:60ch;color:#2B3844;margin-bottom:16px}
+  p.body.tight{max-width:56ch}
+
+  /* practice rows */
+  .tier-label{margin-top:44px;margin-bottom:6px;color:var(--gold);letter-spacing:.14em}
+  .rows{margin-top:14px}
+  .row{display:grid;grid-template-columns:1fr 2.1fr;gap:28px;padding:26px 0;border-top:1px solid var(--line)}
+  .row:first-child{border-top:none}
+  .row h3{font-size:1.06rem;font-weight:400;letter-spacing:-.005em}
+  .row p{color:var(--slate);font-size:.98rem;max-width:48ch}
+  @media(max-width:640px){.row{grid-template-columns:1fr;gap:8px}}
+
+  /* proof strip */
+  .proof{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:8px}
+  .proof div{padding:22px 24px 22px 0}
+  .proof .n{font-size:1.7rem;letter-spacing:-.01em}
+  .proof .l{color:var(--slate);font-size:.9rem;margin-top:4px;font-family:'Courier New',monospace;
+    text-transform:uppercase;letter-spacing:.08em;font-size:.68rem}
+  @media(max-width:640px){.proof{grid-template-columns:1fr;}.proof div{padding:16px 0;border-top:1px solid var(--line)}}
+
+  /* people / team */
+  .people{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:20px}
+  .person .portrait{width:96px;height:96px;border-radius:50%;background:var(--deep);
+    display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+  .person .portrait span{color:var(--gold);font-family:'Courier New',monospace;font-size:1.3rem;letter-spacing:.1em}
+  .person h3{font-size:1.25rem;font-weight:400;margin-bottom:4px}
+  .person .role{margin-bottom:16px;letter-spacing:.12em}
+  .person p{color:#2B3844;font-size:.98rem;max-width:44ch}
+  @media(max-width:640px){.people{grid-template-columns:1fr;gap:44px}}
+
+  /* vision panel — deep, quiet */
+  .vision{background:var(--deep);color:var(--paper);border-bottom:none}
+  .vision .wrap{padding-top:78px;padding-bottom:78px}
+  .vision .lead-label{color:#8FA3B4}
+  .vision h2{color:var(--paper)}
+  .vision p.body{color:#C4D0DB}
+  .vision .note{margin-top:22px;font-size:.86rem;color:#7E93A5;max-width:56ch;font-style:italic}
+
+  /* contact */
+  .contact{padding:74px 0 40px}
+  .contact h2{margin-bottom:26px}
+  .contact a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:1px}
+  .contact a:hover{color:var(--gold)}
+  .contact .cta-primary{color:#1a1205;border-bottom:none}
+  .contact .cta-primary:hover{color:#1a1205}
+  .secondary-paths{margin-top:28px;color:var(--slate);font-size:.98rem}
+  footer{padding:34px 0 60px;color:var(--slate)}
+  .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+  .foot .disc{max-width:60ch;font-size:.78rem;line-height:1.5}
+
+  /* entrance */
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .9s ease,transform .9s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="top">
+      <div class="word">MEHR</div>
+      <nav>
+        <a href="#practice">Practice</a>
+        <a href="mehr_services.html">Services</a>
+        <a href="#approach">Approach</a>
+        <a href="#team">Team</a>
+        <a href="#vision">Firm</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="hero">
+    <div class="mono eyebrow reveal">MEHR Partners · Operator-investors · An investment platform in formation</div>
+    <h1 class="reveal">We help companies cross the gap between product and <em>scalable commercial execution.</em></h1>
+    <p class="sub reveal">MEHR Partners is an operator-investor practice — and the first layer of an investment platform we're building deliberately. We've operated and turned around eight underperforming pharmacies, most within BENU (the Netherlands' largest chain, part of Europe's PHOENIX group), built a consumer brand from scratch, invested as venture partners in Silicon Valley, and hold institutional relationships across the Gulf. We bring operating judgment to the companies we work with, and — over time — to those we invest in.</p>
+    <div class="hero-cta reveal">
+      <a href="#contact" class="cta-primary">Where is execution stalling? →</a>
+      <a href="https://calendly.com/mehr-advisory/new-meeting" class="cta-secondary" target="_blank" rel="noopener">Book a short call →</a>
+    </div>
+  </div>
+</div>
+
+<section id="practice">
+  <div class="wrap">
+    <div class="mono lead-label reveal">01 — The Practice</div>
+    <h2 class="reveal">Where commercial execution, not technology, is the risk.</h2>
+    <p class="body reveal">Investors have grown adept at judging technical and regulatory risk. Commercial execution — the path from a working product to durable, scalable revenue — is where most companies stall, and where our operating experience has the most leverage. Our deepest expertise is in healthcare and pharmacy; the judgment behind it travels.</p>
+
+    <div class="tier-label mono reveal">Healthcare &amp; pharmacy — our deepest expertise</div>
+    <div class="rows reveal">
+      <div class="row">
+        <h3>Operational value-creation &amp; diligence</h3>
+        <p>Buy-side operational diligence and post-acquisition value creation for healthcare-services PE, sponsors, and pharmacy platforms — grounded in real turnaround experience.</p>
+      </div>
+      <div class="row">
+        <h3>Pharmacy operations &amp; European entry</h3>
+        <p>Fractional pharmacy-operations leadership — grounded in operating and turning around eight pharmacies, most within BENU, the Netherlands' largest chain — and regulated EU market entry where a licensed pharmacist is the requirement, not a preference.</p>
+      </div>
+    </div>
+
+    <div class="tier-label mono reveal">The capability travels — across sectors</div>
+    <p class="body tight reveal" style="margin-top:6px">The same operator judgment — commercial execution, cross-border entry, turnaround, and the navigation of high-stakes, cross-cultural rooms where institutional, government, PE, and venture worlds meet — applies well beyond healthcare. We take on select engagements where our edge is real.</p>
+    <div class="rows reveal">
+      <div class="row">
+        <h3>US &amp; EU soft-landing</h3>
+        <p>Two-way market entry: foreign companies landing in the United States, and companies entering Europe. We've made the move ourselves — and open doors to first customers and partners, including through our Silicon Valley network.</p>
+      </div>
+      <div class="row">
+        <h3>Investor-readiness &amp; commercialization</h3>
+        <p>Fundraising preparation, positioning, and go-to-market for funded companies — informed by hundreds of deals seen from the investor's side of the table.</p>
+      </div>
+      <div class="row">
+        <h3>Operational turnaround</h3>
+        <p>Restructuring distressed operations, team and culture turnaround, and systems — for SMBs and portfolio companies that need to fix the operating engine.</p>
+      </div>
+      <div class="row">
+        <h3>Product build &amp; AI implementation</h3>
+        <p>End-to-end product, manufacturing, and channel — from having built a consumer brand — and agentic AI / automation builds delivered with our specialist technical partners.</p>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top:40px">
+      <a href="mehr_services.html" class="cta-primary">Choose the services you need →</a>
+      <p class="cta-aside" style="margin-top:16px">Browse every engagement and tell us which fit your situation — we'll start with a short call.</p>
+    </div>
+  </div>
+</section>
+
+<section id="approach">
+  <div class="wrap">
+    <div class="mono lead-label reveal">02 — Approach</div>
+    <h2 class="reveal">Operators first. A small number of clients at a time.</h2>
+    <p class="body reveal">We are practitioners, not a consultancy. We take on a limited number of engagements so each receives senior, hands-on attention — as monthly advisory retainers, scoped projects, or advisory-board roles. The work is judged by whether it moves the number, not the deck.</p>
+    <div class="proof reveal">
+      <div><div class="n">8</div><div class="l">Underperforming pharmacies operated &amp; turned around, most within BENU</div></div>
+      <div><div class="n">Europe · US · Gulf</div><div class="l">Operated in Europe, invested in Silicon Valley, institutional relationships in the Gulf</div></div>
+      <div><div class="n">Silicon Valley</div><div class="l">Venture partners; an active founder &amp; investor network</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="team">
+  <div class="wrap">
+    <div class="mono lead-label reveal">03 — The Team</div>
+    <h2 class="reveal">Operator-led. Built as a team.</h2>
+    <p class="body reveal">MEHR Partners is led by its founding partners — twin PharmD operator-investors — and supported by a growing team of advisors and fellows. Clients work with senior operators in lockstep, backed by the wider team. Members of the honorary host committee of the DCNY Summit (Capitol Hill), 2026.</p>
+    <p class="body reveal">What we bring beyond the functional work is judgment in high-stakes, cross-cultural rooms. We've operated and negotiated across the seams where institutional, government, private-equity, and venture worlds meet — in Europe, the United States, and the Gulf. When a deal or a market-entry turns on bridging people who read each other wrong, that navigation is where we're a genuine partner.</p>
+  </div>
+</section>
+
+<section id="vision" class="vision">
+  <div class="wrap">
+    <div class="mono lead-label reveal">04 — The Firm</div>
+    <h2 class="reveal">MEHR is being built as an investment platform.</h2>
+    <p class="body reveal">The practice is its first operating layer. Our conviction is that durable investment returns are built on operating judgment — the ability to see what actually creates value inside a business, not only what a model projects. We're building MEHR the way we'd build any enterprise we invest in: deliberately, operator-led, and with the right people around the table — quality of judgment over speed to assets under management.</p>
+    <p class="note reveal">MEHR does not offer or solicit any securities or investment through this site. Any investment activity is conducted privately, with counsel, under applicable exemptions.</p>
+  </div>
+</section>
+
+<div class="wrap">
+  <section id="contact" class="contact" style="border-bottom:none">
+    <div class="mono lead-label reveal">05 — Start here</div>
+    <h2 class="reveal">Tell us where execution is stalling.</h2>
+    <p class="body reveal" style="max-width:54ch">A short call — no pitch. Tell us the problem you're trying to move, and we'll tell you honestly whether we're the right people for it. If it's a fit, we'll often start with a one-page operational read on a live situation, so you can judge the work before committing to anything.</p>
+    <div class="reveal" style="margin-top:30px">
+      <a href="mailto:partners@mehr.vc?subject=Where%20execution%20is%20stalling" class="cta-primary">Start a conversation →</a>
+      <a href="https://calendly.com/mehr-advisory/new-meeting" class="cta-secondary" target="_blank" rel="noopener">Or book a short call →</a>
+    </div>
+    <div class="reveal secondary-paths">
+      <span>Direct — <a href="mailto:partners@mehr.vc">partners@mehr.vc</a></span>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot">
+      <div class="mono">MEHR Partners · Operator-investor practice</div>
+      <div class="disc mono" style="text-transform:none;letter-spacing:normal;font-family:Georgia,serif;font-style:italic">
+        © 2026 MEHR Partners. This site describes an operator-investor practice and is provided for information only. It is not an offer, solicitation, or advice to buy or sell any security or to make any investment.
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(Math.min(i,6)*70)+'ms';io.observe(el)});
+</script>
+</body>
+</html>
