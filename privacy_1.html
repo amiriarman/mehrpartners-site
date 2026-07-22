@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<html lang="en" data-site="partners">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Privacy Notice · MEHR Partners</title>
+  <meta name="description" content="How MEHR Partners collects, uses, and protects the personal information you share with us." />
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+/* ============================================================================
+   MEHR - Shared Design System
+   One source of truth for both mehr.vc and mehrpartners.com.
+   Institutional trust first, Persian visual identity second, decoration last.
+   ============================================================================ */
+
+/* ----------------------------------------------------------------------------
+   1. DESIGN TOKENS
+   ---------------------------------------------------------------------------- */
+:root {
+  /* --- Color: core surfaces --- */
+  --c-indigo:        #1B1F3B;  /* deep lapis / midnight indigo - dominant dark bg */
+  --c-indigo-800:    #23284A;  /* raised indigo for dark cards / bands */
+  --c-indigo-700:    #2C325A;  /* hairline-adjacent indigo tint */
+  --c-ivory:         #F6F4EE;  /* warm ivory / bone - light bg */
+  --c-ivory-200:     #ECE9E0;  /* subtle ivory step for banding on light */
+
+  /* --- Color: shared accents --- */
+  --c-turquoise:     #0E7C7B;  /* firouzeh / Persian turquoise */
+  --c-turquoise-lit: #17A29F;  /* brighter turquoise for on-dark contrast */
+  --c-gold:          #C9A227;  /* saffron / gold */
+  --c-gold-lit:      #DDBB54;  /* brighter gold for on-dark contrast */
+  --c-pomegranate:   #7A1F2B;  /* deep pomegranate - rare single-CTA accent only */
+  --c-pomegranate-lit:#9E2B3A;
+
+  /* --- Color: text --- */
+  --t-on-dark:       #F6F4EE;
+  --t-on-dark-soft:  rgba(246,244,238,0.66);
+  --t-on-dark-faint: rgba(246,244,238,0.40);
+  --t-on-light:      #1B1F3B;
+  --t-on-light-soft: rgba(27,31,59,0.66);
+  --t-on-light-faint:rgba(27,31,59,0.42);
+
+  /* --- Hairlines (1px dividers - no boxes, no shadows) --- */
+  --line-on-dark:    rgba(246,244,238,0.16);
+  --line-on-dark-2:  rgba(246,244,238,0.28);
+  --line-on-light:   rgba(27,31,59,0.14);
+  --line-on-light-2: rgba(27,31,59,0.24);
+
+  /* --- Per-site accent roles. Overridden per site via [data-site]. ---
+     Defaults = mehr.vc (turquoise leads). */
+  --accent-1:        var(--c-turquoise);      /* leading accent */
+  --accent-1-lit:    var(--c-turquoise-lit);
+  --accent-2:        var(--c-gold);           /* secondary accent */
+  --accent-2-lit:    var(--c-gold-lit);
+
+  /* --- Typography faces --- */
+  --font-display: "Cormorant Garamond", "Cormorant", Georgia, "Times New Roman", serif;
+  --font-sans:    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* --- Type scale (fluid, responsive down) --- */
+  --fs-hero:    clamp(3.4rem, 10.5vw, 8.75rem);  /* ~54 → 140px */
+  --fs-h2:      clamp(2.1rem, 4.6vw, 3.5rem);
+  --fs-h3:      clamp(1.5rem, 2.6vw, 2.1rem);
+  --fs-lead:    clamp(1.05rem, 1.7vw, 1.4rem);
+  --fs-body:    clamp(1rem, 1.15vw, 1.075rem);
+  --fs-small:   0.875rem;
+  --fs-eyebrow: 0.75rem;
+  --fs-stat:    clamp(2.6rem, 6vw, 4.5rem);
+
+  --lh-tight:   1.02;
+  --lh-snug:    1.18;
+  --lh-body:    1.62;
+
+  --ls-eyebrow: 0.22em;
+  --ls-label:   0.14em;
+
+  /* --- Grid & spacing --- */
+  --grid-cols:  12;
+  --gutter:     clamp(1rem, 2.2vw, 2rem);
+  --maxw:       1360px;
+  --pad-x:      clamp(1.25rem, 5vw, 5rem);
+
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2.5rem;
+  --space-5: 4rem;
+  --space-6: 6rem;
+  --space-7: 9rem;
+  --section-y: clamp(4.5rem, 10vw, 9rem);
+
+  /* --- Motion --- */
+  --ease-out:   cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out:cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast:   0.35s;
+  --dur-mid:    0.6s;
+  --dur-slow:   0.9s;
+  --reveal-stagger: 90ms;
+}
+
+/* --- Site A: mehr.vc - turquoise leads, gold secondary --- */
+[data-site="vc"] {
+  --accent-1:     var(--c-turquoise);
+  --accent-1-lit: var(--c-turquoise-lit);
+  --accent-2:     var(--c-gold);
+  --accent-2-lit: var(--c-gold-lit);
+}
+/* --- Site B: mehrpartners.com - gold/saffron leads, turquoise secondary --- */
+[data-site="partners"] {
+  --accent-1:     var(--c-gold);
+  --accent-1-lit: var(--c-gold-lit);
+  --accent-2:     var(--c-turquoise);
+  --accent-2-lit: var(--c-turquoise-lit);
+}
+
+/* ----------------------------------------------------------------------------
+   2. RESET / BASE
+   ---------------------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--c-ivory);
+  color: var(--t-on-light);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 { margin: 0; font-weight: 500; }
+p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+img, svg { display: block; max-width: 100%; }
+ul { margin: 0; padding: 0; list-style: none; }
+button { font: inherit; color: inherit; cursor: pointer; background: none; border: none; }
+
+::selection { background: var(--accent-1); color: var(--c-ivory); }
+
+/* ----------------------------------------------------------------------------
+   3. LAYOUT PRIMITIVES
+   ---------------------------------------------------------------------------- */
+.wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--pad-x);
+}
+
+.section { padding-block: var(--section-y); position: relative; }
+
+.dark  { background: var(--c-indigo); color: var(--t-on-dark); }
+.light { background: var(--c-ivory);  color: var(--t-on-light); }
+
+/* 12-col grid helper */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), 1fr);
+  gap: var(--gutter);
+}
+
+/* Full hairline rule */
+.rule { height: 1px; border: 0; background: var(--line-on-light); margin: 0; }
+.dark .rule, .rule--dark { background: var(--line-on-dark); }
+
+/* ----------------------------------------------------------------------------
+   4. TYPOGRAPHY UTILITIES
+   ---------------------------------------------------------------------------- */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--accent-1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+}
+.dark .eyebrow { color: var(--accent-1-lit); }
+.eyebrow::before {
+  content: "";
+  width: 1.6em; height: 1px;
+  background: currentColor;
+  opacity: 0.7;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--t-on-light-soft);
+}
+.dark .label { color: var(--t-on-dark-soft); }
+
+.display { font-family: var(--font-display); line-height: var(--lh-tight); font-weight: 500; letter-spacing: -0.01em; }
+.h2 { font-family: var(--font-display); font-size: var(--fs-h2); line-height: var(--lh-snug); letter-spacing: -0.01em; }
+.h3 { font-family: var(--font-display); font-size: var(--fs-h3); line-height: var(--lh-snug); }
+.lead { font-size: var(--fs-lead); line-height: 1.5; color: var(--t-on-light-soft); font-weight: 350; }
+.dark .lead { color: var(--t-on-dark-soft); }
+
+.accent-1-text { color: var(--accent-1); }
+.dark .accent-1-text { color: var(--accent-1-lit); }
+.accent-2-text { color: var(--accent-2); }
+.dark .accent-2-text { color: var(--accent-2-lit); }
+
+/* ----------------------------------------------------------------------------
+   5. BUTTONS / CTA
+   ---------------------------------------------------------------------------- */
+.cta {
+  --_c: var(--accent-1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85em;
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 1.05em 1.9em;
+  color: var(--c-ivory);
+  background: var(--_c);
+  border: 1px solid var(--_c);
+  position: relative;
+  overflow: hidden;
+  transition: color var(--dur-fast) var(--ease-out);
+  isolation: isolate;
+}
+.cta::before {
+  content: "";
+  position: absolute; inset: 0; z-index: -1;
+  background: var(--c-indigo);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.cta:hover::before { transform: scaleX(1); transform-origin: left; }
+.cta:hover { color: var(--c-ivory); }
+.cta .cta__arrow { transition: transform var(--dur-fast) var(--ease-out); }
+.cta:hover .cta__arrow { transform: translateX(4px); }
+
+/* Rare pomegranate single-CTA variant */
+.cta--rare { --_c: var(--c-pomegranate); }
+.cta--rare:hover { color: var(--c-ivory); }
+
+/* Ghost / secondary link with underline-draw */
+.link-underline {
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding-bottom: 0.3em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+}
+.link-underline::after {
+  content: "";
+  position: absolute; left: 0; bottom: 0;
+  width: 100%; height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.link-underline:hover::after { transform: scaleX(1); transform-origin: left; }
+
+/* ----------------------------------------------------------------------------
+   6. TOP NAV (identical on both sites)
+   ---------------------------------------------------------------------------- */
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(1.1rem, 2.4vw, 1.9rem) var(--pad-x);
+  transition: background var(--dur-mid) var(--ease-out), border-color var(--dur-mid);
+  border-bottom: 1px solid transparent;
+  mix-blend-mode: normal;
+}
+.nav[data-scrolled="true"] {
+  background: rgba(27,31,59,0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom-color: var(--line-on-dark);
+}
+.wordmark {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  letter-spacing: 0.02em;
+  font-weight: 500;
+  color: var(--c-ivory);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5ch;
+}
+.wordmark .wordmark__dot { color: var(--accent-1-lit); font-size: 0.8em; }
+.wordmark .wordmark__tld {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--t-on-dark-soft);
+  transform: translateY(-0.15em);
+}
+
+/* hamburger */
+.burger {
+  width: 40px; height: 22px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  z-index: 61;
+}
+.burger span {
+  position: absolute; left: 0; right: 0;
+  height: 1.5px;
+  background: var(--c-ivory);
+  transition: transform var(--dur-fast) var(--ease-out), opacity var(--dur-fast);
+}
+.burger span:nth-child(1) { top: 4px; }
+.burger span:nth-child(2) { top: 11px; }
+.burger span:nth-child(3) { top: 18px; }
+body.menu-open .burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+body.menu-open .burger span:nth-child(2) { opacity: 0; }
+body.menu-open .burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ----------------------------------------------------------------------------
+   7. FULLSCREEN MENU OVERLAY
+   ---------------------------------------------------------------------------- */
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  background: var(--c-indigo);
+  display: grid;
+  grid-template-rows: 1fr auto;
+  padding: clamp(6rem, 14vh, 9rem) var(--pad-x) clamp(2rem, 6vh, 4rem);
+  clip-path: inset(0 0 100% 0);
+  pointer-events: none;
+  transition: clip-path var(--dur-slow) var(--ease-in-out);
+  overflow: hidden;
+}
+body.menu-open .menu { clip-path: inset(0 0 0 0); pointer-events: auto; }
+
+.menu__pattern {
+  position: absolute; inset: 0;
+  opacity: 0.5;
+  pointer-events: none;
+}
+.menu__links {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.2rem, 1.4vh, 0.9rem);
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+.menu__links a {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 8vw, 5rem);
+  line-height: 1.05;
+  color: var(--t-on-dark);
+  width: max-content;
+  max-width: 100%;
+  position: relative;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity var(--dur-mid) var(--ease-out), transform var(--dur-mid) var(--ease-out), color var(--dur-fast);
+}
+body.menu-open .menu__links a { opacity: 1; transform: none; }
+.menu__links a:hover { color: var(--accent-1-lit); }
+.menu__links a::after {
+  content: "";
+  position: absolute; left: 0; bottom: 0.12em;
+  height: 1px; width: 100%;
+  background: currentColor;
+  transform: scaleX(0); transform-origin: right;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.menu__links a:hover::after { transform: scaleX(1); transform-origin: left; }
+.menu__links a .idx {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  color: var(--accent-1-lit);
+  vertical-align: super;
+  margin-right: 0.6ch;
+}
+.menu__foot {
+  position: relative; z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.4rem 2.4rem;
+  justify-content: space-between;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--line-on-dark);
+  color: var(--t-on-dark-soft);
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  opacity: 0;
+  transition: opacity var(--dur-slow) var(--ease-out) 0.3s;
+}
+body.menu-open .menu__foot { opacity: 1; }
+.menu__foot a:hover { color: var(--accent-1-lit); }
+
+/* ----------------------------------------------------------------------------
+   8. HERO
+   ---------------------------------------------------------------------------- */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  background: var(--c-indigo);
+  color: var(--t-on-dark);
+  overflow: hidden;
+  padding-bottom: clamp(3rem, 8vh, 6rem);
+}
+.hero__bg {
+  position: absolute;
+  inset: -25%;                 /* container ~150% of viewport, hides moving edges */
+  z-index: 0;
+  pointer-events: none;
+}
+.hero__bg svg { width: 100%; height: 100%; }
+@media (prefers-reduced-motion: no-preference) {
+  .hero__bg--spin { animation: spin 150s linear infinite; }
+  .hero__bg--drift { animation: drift 120s linear infinite; }
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes drift { to { transform: translate(-8%, -6%) rotate(90deg); } }
+
+/* radial vignette to seat text over the pattern */
+.hero__veil {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    radial-gradient(120% 90% at 15% 100%, rgba(27,31,59,0.92) 0%, rgba(27,31,59,0.45) 45%, rgba(27,31,59,0.15) 75%),
+    linear-gradient(to top, rgba(27,31,59,0.85) 0%, rgba(27,31,59,0.1) 40%);
+}
+.hero__inner { position: relative; z-index: 3; width: 100%; }
+.hero__eyebrow { margin-bottom: clamp(1.2rem, 3vh, 2rem); }
+.hero__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-hero);
+  line-height: var(--lh-tight);
+  letter-spacing: -0.015em;
+  font-weight: 500;
+  max-width: 15ch;
+}
+.hero__title em { font-style: italic; color: var(--accent-1-lit); }
+.hero__sub {
+  margin-top: clamp(1.4rem, 3vh, 2.2rem);
+  max-width: 46ch;
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+  color: var(--t-on-dark-soft);
+  font-weight: 350;
+}
+.hero__actions { margin-top: clamp(2rem, 4vh, 3rem); display: flex; flex-wrap: wrap; gap: 1.2rem 2rem; align-items: center; }
+.hero__scroll {
+  position: absolute; right: var(--pad-x); bottom: clamp(3rem,8vh,6rem); z-index: 3;
+  writing-mode: vertical-rl;
+  font-family: var(--font-mono); font-size: var(--fs-eyebrow);
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--t-on-dark-faint);
+  display: inline-flex; align-items: center; gap: 1rem;
+}
+.hero__scroll::after { content:""; width:1px; height:48px; background: linear-gradient(var(--accent-1-lit), transparent); }
+@media (max-width: 640px){ .hero__scroll { display:none; } }
+
+/* ----------------------------------------------------------------------------
+   9. STAT BAR
+   ---------------------------------------------------------------------------- */
+.stats {
+  border-top: 1px solid var(--line-on-dark);
+  border-bottom: 1px solid var(--line-on-dark);
+}
+.stats__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.stat {
+  padding: clamp(2rem, 4vw, 3.2rem) clamp(1rem,2vw,2rem);
+  border-left: 1px solid var(--line-on-dark);
+}
+.stat:first-child { border-left: 0; }
+.stat__num {
+  font-family: var(--font-display);
+  font-size: var(--fs-stat);
+  line-height: 1;
+  font-weight: 500;
+  color: var(--t-on-dark);
+  display: flex; align-items: baseline; gap: 0.04em;
+}
+.stat__num .suffix, .stat__num .prefix { color: var(--accent-1-lit); font-size: 0.5em; }
+.stat__label {
+  margin-top: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--t-on-dark-soft);
+}
+@media (max-width: 820px){
+  .stats__grid { grid-template-columns: repeat(2,1fr); }
+  .stat:nth-child(3){ border-left:0; }
+  .stat:nth-child(-n+2){ border-bottom: 1px solid var(--line-on-dark); }
+}
+@media (max-width: 440px){
+  .stats__grid { grid-template-columns: 1fr; }
+  .stat { border-left:0; border-bottom:1px solid var(--line-on-dark); }
+  .stat:last-child{ border-bottom:0; }
+}
+
+/* ----------------------------------------------------------------------------
+   10. SECTION HEADERS + COLUMNS ("What We Do" / "Who We Serve")
+   ---------------------------------------------------------------------------- */
+.sec-head { display: grid; grid-template-columns: 1fr; gap: 1.4rem; max-width: 62ch; }
+.sec-head .h2 { margin-top: 0.3rem; }
+
+.cols {
+  margin-top: clamp(2.6rem, 6vw, 4.5rem);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line-on-light);
+}
+.dark .cols { border-top-color: var(--line-on-dark); }
+.col {
+  padding: clamp(1.8rem,3vw,2.6rem) clamp(1.4rem,2.4vw,2.2rem);
+  border-left: 1px solid var(--line-on-light);
+  min-height: 100%;
+}
+.dark .col { border-left-color: var(--line-on-dark); }
+.col:first-child { border-left: 0; padding-left: 0; }
+.col__idx { font-family: var(--font-mono); font-size: var(--fs-eyebrow); letter-spacing: var(--ls-label); color: var(--accent-1); }
+.dark .col__idx { color: var(--accent-1-lit); }
+.col__title { font-family: var(--font-display); font-size: var(--fs-h3); line-height: var(--lh-snug); margin: 1.1rem 0 0.9rem; }
+.col__body { color: var(--t-on-light-soft); font-size: var(--fs-body); }
+.dark .col__body { color: var(--t-on-dark-soft); }
+@media (max-width: 860px){
+  .cols { grid-template-columns: 1fr; }
+  .col { border-left: 0; padding-left: 0; border-top: 1px solid var(--line-on-light); }
+  .col:first-child { border-top: 0; }
+  .dark .col { border-top-color: var(--line-on-dark); }
+}
+
+/* two-column variant */
+.cols--2 { grid-template-columns: repeat(2,1fr); }
+@media (max-width: 860px){ .cols--2 { grid-template-columns: 1fr; } }
+
+/* ----------------------------------------------------------------------------
+   11. APPROACH / PHILOSOPHY (single Method B watermark)
+   ---------------------------------------------------------------------------- */
+.approach { position: relative; overflow: hidden; }
+.approach__mark {
+  position: absolute;
+  right: -8%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(58vw, 720px);
+  aspect-ratio: 1;
+  z-index: 0;
+  opacity: 0.5;
+  pointer-events: none;
+}
+.approach__mark svg { width: 100%; height: 100%; }
+.approach__inner { position: relative; z-index: 2; }
+.approach__grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(2rem,5vw,5rem); align-items: start; }
+@media (max-width: 900px){ .approach__grid { grid-template-columns: 1fr; } .approach__mark{ width: 90vw; opacity: 0.35; } }
+.principles { margin-top: clamp(1.8rem,3vw,2.6rem); }
+.principle {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.2rem 1.6rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--line-on-light);
+  align-items: baseline;
+}
+.dark .principle { border-top-color: var(--line-on-dark); }
+.principle__k { font-family: var(--font-mono); font-size: var(--fs-eyebrow); letter-spacing: var(--ls-label); color: var(--accent-1); }
+.dark .principle__k { color: var(--accent-1-lit); }
+.principle__t { font-family: var(--font-display); font-size: var(--fs-h3); line-height: 1.2; }
+.principle__d { grid-column: 2; color: var(--t-on-light-soft); }
+.dark .principle__d { color: var(--t-on-dark-soft); }
+
+/* ----------------------------------------------------------------------------
+   12. FOCUS / PORTFOLIO GRID (quiet hover-reveal)
+   ---------------------------------------------------------------------------- */
+.focus-grid {
+  margin-top: clamp(2.6rem,6vw,4.5rem);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line-on-light);
+  border-left: 1px solid var(--line-on-light);
+}
+.dark .focus-grid { border-color: var(--line-on-dark); }
+.focus {
+  position: relative;
+  padding: clamp(1.8rem,3vw,2.6rem);
+  border-right: 1px solid var(--line-on-light);
+  border-bottom: 1px solid var(--line-on-light);
+  overflow: hidden;
+  min-height: clamp(200px, 22vw, 260px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: background var(--dur-mid) var(--ease-out);
+}
+.dark .focus { border-color: var(--line-on-dark); }
+.focus::before { /* accent underline reveal */
+  content: "";
+  position: absolute; left: 0; bottom: 0;
+  height: 2px; width: 100%;
+  background: var(--accent-1);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform var(--dur-mid) var(--ease-out);
+}
+.dark .focus::before { background: var(--accent-1-lit); }
+.focus:hover::before { transform: scaleX(1); }
+.focus:hover { background: color-mix(in srgb, var(--accent-1) 6%, transparent); }
+.focus__inner { transition: transform var(--dur-mid) var(--ease-out); }
+.focus:hover .focus__inner { transform: translateY(-4px); }
+.focus__idx { font-family: var(--font-mono); font-size: var(--fs-eyebrow); letter-spacing: var(--ls-label); color: var(--t-on-light-faint); }
+.dark .focus__idx { color: var(--t-on-dark-faint); }
+.focus__title { font-family: var(--font-display); font-size: var(--fs-h3); line-height: 1.15; margin-top: 2.4rem; }
+.focus__meta { margin-top: 1rem; font-family: var(--font-mono); font-size: var(--fs-eyebrow); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--accent-1); }
+.dark .focus__meta { color: var(--accent-1-lit); }
+@media (max-width: 860px){ .focus-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 520px){ .focus-grid { grid-template-columns: 1fr; } }
+
+/* ----------------------------------------------------------------------------
+   13. INSIGHTS BAND (dark)
+   ---------------------------------------------------------------------------- */
+.insights__list { margin-top: clamp(2.4rem,5vw,3.6rem); border-top: 1px solid var(--line-on-dark); }
+.insight {
+  display: grid;
+  grid-template-columns: 8rem 1fr auto;
+  gap: 1.4rem 2rem;
+  align-items: baseline;
+  padding: clamp(1.4rem,2.6vw,2rem) 0;
+  border-bottom: 1px solid var(--line-on-dark);
+  transition: padding-left var(--dur-fast) var(--ease-out);
+}
+.insight:hover { padding-left: 0.8rem; }
+.insight__date { font-family: var(--font-mono); font-size: var(--fs-eyebrow); letter-spacing: var(--ls-label); color: var(--accent-1-lit); }
+.insight__cat  { font-family: var(--font-mono); font-size: var(--fs-eyebrow); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--t-on-dark-faint); }
+.insight__title { font-family: var(--font-display); font-size: clamp(1.3rem,2.4vw,1.9rem); line-height: 1.2; }
+.insight:hover .insight__title { color: var(--accent-1-lit); }
+@media (max-width: 720px){
+  .insight { grid-template-columns: 1fr; gap: 0.5rem; }
+  .insight__cat { order: 3; }
+}
+
+/* ----------------------------------------------------------------------------
+   14. CTA STRIP
+   ---------------------------------------------------------------------------- */
+.cta-strip { text-align: center; }
+.cta-strip .h2 { max-width: 20ch; margin-inline: auto; }
+.cta-strip__sub { max-width: 52ch; margin: 1.4rem auto 2.4rem; }
+
+/* ----------------------------------------------------------------------------
+   15. FOOTER (identical structure)
+   ---------------------------------------------------------------------------- */
+.footer { background: var(--c-indigo); color: var(--t-on-dark); padding-block: clamp(3.5rem,7vw,6rem) 2.5rem; border-top: 1px solid var(--line-on-dark); }
+.footer__top { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: clamp(2rem,4vw,3rem); }
+.footer__brand .wordmark { font-size: 2rem; }
+.footer__desc { margin-top: 1.2rem; max-width: 34ch; color: var(--t-on-dark-soft); font-size: var(--fs-small); }
+.footer__col h4 { font-family: var(--font-mono); font-size: var(--fs-eyebrow); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--t-on-dark-faint); margin-bottom: 1.2rem; font-weight: 500; }
+.footer__col a { display: block; padding: 0.4rem 0; color: var(--t-on-dark-soft); }
+.footer__col a:hover { color: var(--accent-1-lit); }
+.footer__bottom { margin-top: clamp(3rem,5vw,4.5rem); padding-top: 1.6rem; border-top: 1px solid var(--line-on-dark); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; font-family: var(--font-mono); font-size: var(--fs-eyebrow); letter-spacing: 0.06em; color: var(--t-on-dark-faint); }
+.footer__sister a { color: var(--accent-1-lit); }
+@media (max-width: 760px){ .footer__top { grid-template-columns: 1fr 1fr; } .footer__brand { grid-column: 1 / -1; } }
+@media (max-width: 440px){ .footer__top { grid-template-columns: 1fr; } }
+
+/* ----------------------------------------------------------------------------
+   16. SCROLL REVEAL (IntersectionObserver adds .in)
+   ---------------------------------------------------------------------------- */
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out); will-change: opacity, transform; }
+.reveal.in { opacity: 1; transform: none; }
+.reveal[data-delay="1"]{ transition-delay: 0.09s; }
+.reveal[data-delay="2"]{ transition-delay: 0.18s; }
+.reveal[data-delay="3"]{ transition-delay: 0.27s; }
+.reveal[data-delay="4"]{ transition-delay: 0.36s; }
+.reveal[data-delay="5"]{ transition-delay: 0.45s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .hero__bg--spin, .hero__bg--drift { animation: none !important; }
+  .menu__links a, .menu__foot { transition: none !important; }
+}
+
+/* ----------------------------------------------------------------------------
+   17. MISC
+   ---------------------------------------------------------------------------- */
+.section-index { font-family: var(--font-mono); font-size: var(--fs-eyebrow); letter-spacing: var(--ls-label); color: var(--t-on-light-faint); }
+.dark .section-index { color: var(--t-on-dark-faint); }
+.u-mt-sm { margin-top: 1.4rem; }
+.u-mt { margin-top: 2.2rem; }
+.center { text-align: center; }
+
+/* ============================================================================
+   18. CINEMATIC HERO (KKR-style: layered parallax + light sweep + kinetic type)
+   ============================================================================ */
+.hero--cinematic { align-items: center; padding-top: 8rem; }
+
+.hero__layers { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+/* outer = pointer-parallax target (no keyframe animation, so inline transform wins) */
+/* sized 200% of viewport so continuous rotation never reveals the tile edges */
+.hero__layer { position: absolute; inset: -50%; will-change: transform; }
+.hero__layer--far  { opacity: 0.7; }
+.hero__layer--near { opacity: 1; }
+/* inner = ambient rotation (separate element from the parallax transform - no conflict) */
+.hero__layer-inner { position: absolute; inset: 0; will-change: transform; transform-origin: center; }
+.hero__layer-inner svg { width: 100%; height: 100%; }
+@media (prefers-reduced-motion: no-preference) {
+  /* two counter-rotating girih layers at different speeds -> perceptible, elegant depth */
+  .hero__layer--far  .hero__layer-inner { animation: heroSpinFar 90s linear infinite; }
+  .hero__layer--near .hero__layer-inner { animation: heroSpinNear 60s linear infinite; }
+}
+@keyframes heroSpinFar  { from { transform: rotate(0deg)  scale(1.06); } to { transform: rotate(360deg)  scale(1.06); } }
+@keyframes heroSpinNear { from { transform: rotate(0deg)  scale(1.02); } to { transform: rotate(-360deg) scale(1.02); } }
+
+/* slow diagonal light sweep - stronger + a touch faster so it clearly reads */
+.hero__sweep { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+.hero__sweep::before {
+  content: ""; position: absolute; top: -60%; left: -60%; width: 80%; height: 220%;
+  background: linear-gradient(100deg, transparent 0%, color-mix(in srgb, var(--accent-1-lit) 32%, transparent) 45%, color-mix(in srgb, var(--accent-2-lit) 22%, transparent) 55%, transparent 100%);
+  filter: blur(38px);
+  transform: translateX(-30%) rotate(8deg);
+  opacity: 0.65;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero__sweep::before { animation: heroSweep 13s var(--ease-in-out) infinite alternate; }
+}
+@keyframes heroSweep { from { transform: translateX(-25%) rotate(8deg); } to { transform: translateX(165%) rotate(8deg); } }
+
+/* central soft radial to seat the type, plus bottom grounding */
+.hero--cinematic .hero__veil {
+  background:
+    radial-gradient(90% 70% at 30% 45%, rgba(27,31,59,0.72) 0%, rgba(27,31,59,0.30) 55%, rgba(27,31,59,0.55) 100%),
+    linear-gradient(to bottom, rgba(27,31,59,0.55), rgba(27,31,59,0.2) 30%, rgba(27,31,59,0.7));
+}
+
+/* kinetic headline - lines rise from a masked baseline */
+.hero__title .line { display: block; overflow: hidden; }
+.hero__title .line__inner {
+  display: block;
+  transform: translateY(115%);
+  transition: transform 1.05s var(--ease-out);
+}
+.hero--cinematic.is-ready .hero__title .line__inner { transform: translateY(0); }
+.hero--cinematic .hero__title .line:nth-child(1) .line__inner { transition-delay: 0.15s; }
+.hero--cinematic .hero__title .line:nth-child(2) .line__inner { transition-delay: 0.30s; }
+.hero--cinematic .hero__title .line:nth-child(3) .line__inner { transition-delay: 0.45s; }
+
+/* fade-rise for eyebrow / sub / actions on ready */
+.hero--cinematic .hero__eyebrow,
+.hero--cinematic .hero__sub,
+.hero--cinematic .hero__actions {
+  opacity: 0; transform: translateY(18px);
+  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+}
+.hero--cinematic.is-ready .hero__eyebrow { transition-delay: 0.1s; opacity: 1; transform: none; }
+.hero--cinematic.is-ready .hero__sub     { transition-delay: 0.65s; opacity: 1; transform: none; }
+.hero--cinematic.is-ready .hero__actions { transition-delay: 0.8s;  opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__layer-inner { animation: none !important; }
+  .hero__sweep::before { animation: none !important; opacity: 0.3; }
+  .hero__title .line__inner { transform: none !important; transition: none !important; }
+  .hero--cinematic .hero__eyebrow,
+  .hero--cinematic .hero__sub,
+  .hero--cinematic .hero__actions { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
+
+/* ============================================================================
+   19. POSITIONING STRIP (replaces numeric stat bar - qualitative pillars)
+   ============================================================================ */
+.posbar { border-top: 1px solid var(--line-on-dark); border-bottom: 1px solid var(--line-on-dark); }
+.posbar__grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+.pos {
+  padding: clamp(2rem,4vw,3rem) clamp(1.2rem,2vw,2rem);
+  border-left: 1px solid var(--line-on-dark);
+}
+.pos:first-child { border-left: 0; }
+.pos__k { font-family: var(--font-mono); font-size: var(--fs-eyebrow); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--accent-1-lit); }
+.pos__t { font-family: var(--font-display); font-size: var(--fs-h3); line-height: 1.15; margin-top: 0.9rem; }
+.pos__d { margin-top: 0.7rem; color: var(--t-on-dark-soft); font-size: var(--fs-small); }
+@media (max-width: 780px){
+  .posbar__grid { grid-template-columns: 1fr; }
+  .pos { border-left: 0; border-top: 1px solid var(--line-on-dark); }
+  .pos:first-child { border-top: 0; }
+}
+
+/* ============================================================================
+   20. PROCESS / FUNNEL ("How we work")
+   ============================================================================ */
+.process { margin-top: clamp(2.6rem,6vw,4.5rem); display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line-on-light); }
+.dark .process { border-top-color: var(--line-on-dark); }
+.step { position: relative; padding: clamp(1.8rem,3vw,2.4rem) clamp(1.3rem,2vw,1.9rem) clamp(2.2rem,3vw,2.8rem); border-left: 1px solid var(--line-on-light); }
+.dark .step { border-left-color: var(--line-on-dark); }
+.step:first-child { border-left: 0; padding-left: 0; }
+.step__k { font-family: var(--font-mono); font-size: var(--fs-eyebrow); letter-spacing: var(--ls-label); color: var(--accent-1); }
+.dark .step__k { color: var(--accent-1-lit); }
+.step__arrow { position: absolute; top: calc(1.8rem + 0.1em); right: 1.1rem; color: var(--t-on-light-faint); font-family: var(--font-mono); }
+.dark .step__arrow { color: var(--t-on-dark-faint); }
+.step:last-child .step__arrow { display: none; }
+.step__t { font-family: var(--font-display); font-size: var(--fs-h3); line-height: 1.15; margin: 1.4rem 0 0.7rem; }
+.step__d { color: var(--t-on-light-soft); font-size: var(--fs-small); }
+.dark .step__d { color: var(--t-on-dark-soft); }
+.step__meta { margin-top: 1rem; font-family: var(--font-mono); font-size: var(--fs-eyebrow); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--accent-2); }
+.dark .step__meta { color: var(--accent-2-lit); }
+@media (max-width: 860px){
+  .process { grid-template-columns: 1fr 1fr; }
+  .step:nth-child(3){ border-left: 0; padding-left: 0; }
+  .step:nth-child(-n+2){ border-bottom: 1px solid var(--line-on-light); }
+  .dark .step:nth-child(-n+2){ border-bottom-color: var(--line-on-dark); }
+}
+@media (max-width: 480px){
+  .process { grid-template-columns: 1fr; }
+  .step { border-left: 0; padding-left: 0; border-top: 1px solid var(--line-on-light); }
+  .step:first-child { border-top: 0; }
+  .dark .step { border-top-color: var(--line-on-dark); }
+  .step__arrow { display: none; }
+}
+
+/* offer pair - two lead advisory offers */
+.offers { margin-top: clamp(2.6rem,6vw,4.5rem); display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line-on-light); }
+.dark .offers { border-color: var(--line-on-dark); }
+.offer { padding: clamp(2rem,3.5vw,3rem); border-left: 1px solid var(--line-on-light); position: relative; }
+.dark .offer { border-left-color: var(--line-on-dark); }
+.offer:first-child { border-left: 0; }
+.offer__k { font-family: var(--font-mono); font-size: var(--fs-eyebrow); letter-spacing: var(--ls-label); color: var(--accent-1); }
+.dark .offer__k { color: var(--accent-1-lit); }
+.offer__t { font-family: var(--font-display); font-size: var(--fs-h2); line-height: 1.1; margin: 1rem 0 1rem; }
+.offer__d { color: var(--t-on-light-soft); }
+.dark .offer__d { color: var(--t-on-dark-soft); }
+.offer__list { margin-top: 1.3rem; }
+.offer__list li { position: relative; padding: 0.55rem 0 0.55rem 1.4rem; border-top: 1px solid var(--line-on-light); font-size: var(--fs-small); color: var(--t-on-light-soft); }
+.dark .offer__list li { border-top-color: var(--line-on-dark); color: var(--t-on-dark-soft); }
+.offer__list li::before { content: "→"; position: absolute; left: 0; color: var(--accent-1); }
+.dark .offer__list li::before { color: var(--accent-1-lit); }
+@media (max-width: 720px){ .offers { grid-template-columns: 1fr; } .offer { border-left: 0; border-top: 1px solid var(--line-on-light); } .offer:first-child { border-top: 0; } .dark .offer { border-top-color: var(--line-on-dark); } }
+
+/* ============================================================================
+   21. TEAM / FOUNDING PARTNERS
+   ============================================================================ */
+.team-grid { margin-top: clamp(2.6rem,6vw,4.5rem); display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid var(--line-on-light); }
+.dark .team-grid { border-top-color: var(--line-on-dark); }
+.member { display: grid; grid-template-columns: auto 1fr; gap: clamp(1.2rem,2vw,1.8rem); padding: clamp(2rem,3.5vw,3rem) clamp(1.6rem,2.4vw,2.4rem); border-left: 1px solid var(--line-on-light); align-items: start; }
+.dark .member { border-left-color: var(--line-on-dark); }
+.member:first-child { border-left: 0; padding-left: 0; }
+.avatar {
+  width: clamp(64px, 8vw, 92px); aspect-ratio: 1; border-radius: 50%;
+  display: grid; place-items: center;
+  border: 1px solid var(--line-on-light-2);
+  font-family: var(--font-display); font-size: 1.7rem; color: var(--accent-1);
+  background: color-mix(in srgb, var(--accent-1) 7%, transparent);
+  position: relative; overflow: hidden;
+}
+.avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 22%; }
+.dark .avatar { border-color: var(--line-on-dark-2); color: var(--accent-1-lit); background: color-mix(in srgb, var(--accent-1-lit) 10%, transparent); }
+
+/* legal / prose (privacy notice) */
+.legal { max-width: 76ch; }
+.legal h2 { font-family: var(--font-display); font-size: var(--fs-h3); line-height: 1.2; margin: clamp(2rem,4vw,3rem) 0 0.9rem; }
+.legal h2:first-of-type { margin-top: 0; }
+.legal p, .legal li { color: var(--t-on-light-soft); font-size: var(--fs-body); }
+.dark .legal p, .dark .legal li { color: var(--t-on-dark-soft); }
+.legal p { margin-bottom: 1rem; }
+.legal ul { margin: 0 0 1.2rem; display: grid; gap: 0.5rem; }
+.legal li { position: relative; padding-left: 1.3rem; }
+.legal li::before { content: ""; position: absolute; left: 0; top: 0.65em; width: 0.4rem; height: 0.4rem; border-radius: 50%; background: var(--accent-1); }
+.dark .legal li::before { background: var(--accent-1-lit); }
+.legal a { border-bottom: 1px solid currentColor; }
+.legal__meta { font-family: var(--font-mono); font-size: var(--fs-eyebrow); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--t-on-light-faint); margin-bottom: 2rem; }
+.dark .legal__meta { color: var(--t-on-dark-faint); }
+.member__name { font-family: var(--font-display); font-size: var(--fs-h3); line-height: 1.1; }
+.member__role { font-family: var(--font-mono); font-size: var(--fs-eyebrow); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--accent-1); margin-top: 0.5rem; }
+.dark .member__role { color: var(--accent-1-lit); }
+.member__bio { margin-top: 1rem; color: var(--t-on-light-soft); font-size: var(--fs-small); }
+.dark .member__bio { color: var(--t-on-dark-soft); }
+.member__tags { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.tag { font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--t-on-light-soft); border: 1px solid var(--line-on-light-2); padding: 0.3em 0.7em; border-radius: 100px; }
+.dark .tag { color: var(--t-on-dark-soft); border-color: var(--line-on-dark-2); }
+@media (max-width: 760px){ .team-grid { grid-template-columns: 1fr; } .member { border-left: 0; padding-left: 0; border-top: 1px solid var(--line-on-light); } .member:first-child { border-top: 0; } .dark .member { border-top-color: var(--line-on-dark); } }
+
+/* ============================================================================
+   22. ENGAGEMENTS / EVENTS (DCNY etc.)
+   ============================================================================ */
+.engage-feature {
+  margin-top: clamp(2.6rem,6vw,4.5rem);
+  display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(1.6rem,3vw,3rem);
+  padding: clamp(2rem,4vw,3.2rem); align-items: center;
+  border: 1px solid var(--line-on-light);
+  position: relative; overflow: hidden;
+}
+.dark .engage-feature { border-color: var(--line-on-dark); }
+.engage-feature__badge { font-family: var(--font-mono); font-size: var(--fs-eyebrow); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--accent-2); display: inline-flex; align-items: center; gap: 0.6em; }
+.dark .engage-feature__badge { color: var(--accent-2-lit); }
+.engage-feature__badge::before { content: ""; width: 0.5em; height: 0.5em; border-radius: 50%; background: currentColor; }
+.engage-feature__t { font-family: var(--font-display); font-size: var(--fs-h2); line-height: 1.08; margin: 1rem 0; }
+.engage-feature__d { color: var(--t-on-light-soft); }
+.dark .engage-feature__d { color: var(--t-on-dark-soft); }
+.engage-feature__meta { display: grid; gap: 0.9rem; }
+.engage-feature__row { display: grid; grid-template-columns: 6.5rem 1fr; gap: 1rem; padding: 0.8rem 0; border-top: 1px solid var(--line-on-light); font-size: var(--fs-small); }
+.dark .engage-feature__row { border-top-color: var(--line-on-dark); }
+.engage-feature__row .k { font-family: var(--font-mono); font-size: var(--fs-eyebrow); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--t-on-light-faint); }
+.dark .engage-feature__row .k { color: var(--t-on-dark-faint); }
+@media (max-width: 760px){ .engage-feature { grid-template-columns: 1fr; } }
+
+/* ============================================================================
+   23. BOOK-A-CALL CTA + DISCLAIMER
+   ============================================================================ */
+.cta--book { --_c: var(--accent-1); }
+.cta--book .cta__ico { width: 1.05em; height: 1.05em; }
+.dark .cta--book { --_c: var(--accent-1-lit); color: var(--c-indigo); }
+.dark .cta--book:hover { color: var(--c-ivory); }
+
+.disclaimer {
+  font-family: var(--font-mono); font-size: 0.68rem; line-height: 1.7; letter-spacing: 0.02em;
+  color: var(--t-on-dark-faint); max-width: 90ch;
+}
+.footer .disclaimer { margin-top: 1.4rem; }
+
+/* editorial note flag - visible only as a subtle marker for content to replace pre-launch */
+.editnote { outline: 1px dashed color-mix(in srgb, var(--c-pomegranate-lit) 55%, transparent); outline-offset: 3px; }
+
+/* ============================================================================
+   24. OFFERS - 3-up variant
+   ============================================================================ */
+.offers--3 { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 900px){ .offers--3 { grid-template-columns: 1fr; } }
+
+/* secondary capabilities strip (breadth signal under the flagship offers) */
+.also { margin-top: clamp(2.4rem,5vw,3.4rem); padding-top: clamp(1.8rem,3vw,2.2rem); border-top: 1px solid var(--line-on-light); display: grid; grid-template-columns: 13rem 1fr; gap: 1rem 2.6rem; align-items: baseline; }
+.dark .also { border-top-color: var(--line-on-dark); }
+.also__k { font-family: var(--font-mono); font-size: var(--fs-eyebrow); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--accent-1); }
+.dark .also__k { color: var(--accent-1-lit); }
+.also__items { display: flex; flex-wrap: wrap; align-items: baseline; }
+.also__items span { font-family: var(--font-display); font-size: clamp(1.05rem,1.7vw,1.35rem); line-height: 1.5; color: var(--t-on-light); }
+.dark .also__items span { color: var(--t-on-dark); }
+.also__items span:not(:first-child)::before { content: "·"; margin: 0 0.85rem; color: var(--t-on-light-faint); }
+.dark .also__items span:not(:first-child)::before { color: var(--t-on-dark-faint); }
+@media (max-width: 760px){ .also { grid-template-columns: 1fr; } }
+
+/* DCNY partner logo lockup (self-heals to nothing if the file is absent) */
+.eng-logo { margin-bottom: 1.4rem; }
+.eng-logo img { height: clamp(36px, 4vw, 54px); width: auto; }
+
+/* ============================================================================
+   25. WHO WE SERVE - inline chips row (compact, sector-agnostic)
+   ============================================================================ */
+.serve-row { margin-top: 1.6rem; display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.serve-row .tag { font-size: 0.7rem; padding: 0.4em 0.9em; }
+
+/* ============================================================================
+   26. CONTACT FORM (hairline aesthetic, spam-hardened)
+   ============================================================================ */
+.contact__grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem,5vw,5rem); align-items: start; }
+@media (max-width: 820px){ .contact__grid { grid-template-columns: 1fr; } }
+
+.contact-form { display: grid; gap: 1.6rem; }
+.field { position: relative; display: grid; gap: 0.5rem; }
+.field label {
+  font-family: var(--font-mono); font-size: var(--fs-eyebrow);
+  letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--t-on-light-soft);
+}
+.dark .field label { color: var(--t-on-dark-soft); }
+.field input, .field textarea {
+  width: 100%;
+  font-family: var(--font-sans); font-size: var(--fs-body);
+  color: var(--t-on-light);
+  background: transparent;
+  border: 0; border-bottom: 1px solid var(--line-on-light-2);
+  padding: 0.6rem 0;
+  transition: border-color var(--dur-fast) var(--ease-out);
+  border-radius: 0;
+}
+.dark .field input, .dark .field textarea { color: var(--t-on-dark); border-bottom-color: var(--line-on-dark-2); }
+.field textarea { resize: vertical; min-height: 5.5rem; }
+.field input:focus, .field textarea:focus { outline: none; border-bottom-color: var(--accent-1); }
+.dark .field input:focus, .dark .field textarea:focus { border-bottom-color: var(--accent-1-lit); }
+.field input::placeholder, .field textarea::placeholder { color: var(--t-on-light-faint); }
+.dark .field input::placeholder, .dark .field textarea::placeholder { color: var(--t-on-dark-faint); }
+
+/* honeypot - hidden from humans, visible to naive bots */
+.hp-field { position: absolute !important; left: -9999px !important; top: auto; width: 1px; height: 1px; overflow: hidden; }
+
+.form__row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; }
+@media (max-width: 480px){ .form__row2 { grid-template-columns: 1fr; } }
+
+.cf-turnstile { margin-top: 0.2rem; min-height: 0; }
+.form__foot { display: flex; flex-wrap: wrap; align-items: center; gap: 1.2rem 1.6rem; }
+.form__note { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.02em; color: var(--t-on-light-faint); max-width: 40ch; }
+.dark .form__note { color: var(--t-on-dark-faint); }
+.form__status { font-family: var(--font-mono); font-size: var(--fs-small); letter-spacing: 0.02em; min-height: 1.2em; }
+.form__status[data-state="ok"]   { color: var(--c-turquoise); }
+.form__status[data-state="err"]  { color: var(--c-pomegranate); }
+.dark .form__status[data-state="ok"]  { color: var(--c-turquoise-lit); }
+.dark .form__status[data-state="err"] { color: var(--c-pomegranate-lit); }
+button.cta { cursor: pointer; }
+button.cta[disabled] { opacity: 0.5; pointer-events: none; }
+
+/* contact aside (email / direct) */
+.contact-aside__line { display: grid; grid-template-columns: 7rem 1fr; gap: 1rem; padding: 1rem 0; border-top: 1px solid var(--line-on-light); font-size: var(--fs-small); }
+.dark .contact-aside__line { border-top-color: var(--line-on-dark); }
+.contact-aside__line:last-child { border-bottom: 1px solid var(--line-on-light); }
+.dark .contact-aside__line:last-child { border-bottom-color: var(--line-on-dark); }
+.contact-aside__line .k { font-family: var(--font-mono); font-size: var(--fs-eyebrow); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--t-on-light-faint); }
+.dark .contact-aside__line .k { color: var(--t-on-dark-faint); }
+.email-link { border-bottom: 1px solid transparent; transition: border-color var(--dur-fast); }
+.email-link:hover { border-bottom-color: currentColor; }
+
+/* ============================================================================
+   27. INTERIOR SUBPAGE HEADER (engagements etc.)
+   ============================================================================ */
+.subhero {
+  position: relative; background: var(--c-indigo); color: var(--t-on-dark);
+  padding: clamp(8rem, 16vh, 12rem) 0 clamp(3rem,7vw,5rem);
+  overflow: hidden;
+}
+.subhero__bg { position: absolute; inset: -45%; z-index: 0; opacity: 0.6; pointer-events: none; }
+.subhero__bg svg { width: 100%; height: 100%; }
+@media (prefers-reduced-motion: no-preference){ .subhero__bg { animation: heroSpinFar 120s linear infinite; transform-origin: center; } }
+.subhero__veil { position: absolute; inset: 0; z-index: 1; background: linear-gradient(to bottom, rgba(27,31,59,0.5), rgba(27,31,59,0.85)); pointer-events: none; }
+.subhero__inner { position: relative; z-index: 2; }
+.subhero__crumbs { font-family: var(--font-mono); font-size: var(--fs-eyebrow); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--t-on-dark-faint); display: flex; gap: 0.7em; align-items: center; }
+.subhero__crumbs a:hover { color: var(--accent-1-lit); }
+.subhero__title { font-family: var(--font-display); font-size: var(--fs-h2); line-height: 1.05; letter-spacing: -0.01em; margin-top: 1.4rem; max-width: 18ch; }
+.subhero__sub { margin-top: 1.3rem; max-width: 52ch; color: var(--t-on-dark-soft); font-size: var(--fs-lead); line-height: 1.5; font-weight: 350; }
+
+/* ============================================================================
+   28. MEDIA FRAME (DCNY image)
+   ============================================================================ */
+.media-frame { position: relative; overflow: hidden; border: 1px solid var(--line-on-light); background: var(--c-indigo); }
+.dark .media-frame { border-color: var(--line-on-dark); }
+.media-frame__img { width: 100%; height: 100%; object-fit: cover; display: block; aspect-ratio: 4 / 3; }
+/* temporary sunset placeholder - evokes the DC skyline photo until the real image is embedded */
+.media-frame__placeholder {
+  aspect-ratio: 4 / 3; width: 100%;
+  background:
+    radial-gradient(120% 80% at 50% 92%, rgba(201,162,39,0.55), transparent 55%),
+    linear-gradient(to bottom, #3a2b57 0%, #6d3a6e 38%, #b0567e 62%, #d98a6a 80%, #2a2140 100%);
+  position: relative;
+}
+.media-frame__placeholder::after {
+  content: "DCNY · image to embed";
+  position: absolute; inset: auto 0 1rem 0; text-align: center;
+  font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(246,244,238,0.7);
+}
+.media-frame__cap { font-family: var(--font-mono); font-size: var(--fs-eyebrow); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--t-on-light-faint); margin-top: 0.9rem; }
+.dark .media-frame__cap { color: var(--t-on-dark-faint); }
+
+/* engagement feature with media on the side */
+.eng-media-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(2rem,4vw,3.5rem); align-items: center; }
+@media (max-width: 820px){ .eng-media-grid { grid-template-columns: 1fr; } }
+
+/* wide cinematic media band (e.g. NYC skyline) */
+.media-band { position: relative; overflow: hidden; border: 1px solid var(--line-on-light); }
+.dark .media-band { border-color: var(--line-on-dark); }
+.media-band__img { width: 100%; display: block; aspect-ratio: 5 / 2; object-fit: cover; object-position: center 62%; }
+.media-band__placeholder {
+  aspect-ratio: 5 / 2; width: 100%; position: relative;
+  background:
+    radial-gradient(90% 130% at 50% 100%, rgba(201,162,39,0.28), transparent 55%),
+    radial-gradient(60% 120% at 82% 100%, rgba(122,31,43,0.30), transparent 55%),
+    linear-gradient(to bottom, #0a1636 0%, #14245c 46%, #24356f 70%, #3a4a86 86%, #0e1630 100%);
+}
+.media-band__placeholder::after {
+  content: "NYC · image to embed"; position: absolute; inset: auto 0 0.9rem 0; text-align: center;
+  font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(246,244,238,0.72);
+}
+@media (max-width: 640px){ .media-band__img, .media-band__placeholder { aspect-ratio: 3 / 2; } }
+
+/* other engagements list */
+.eng-list { margin-top: clamp(2.4rem,5vw,3.6rem); border-top: 1px solid var(--line-on-light); }
+.dark .eng-list { border-top-color: var(--line-on-dark); }
+.eng-item { display: grid; grid-template-columns: 1fr auto; gap: 1rem 2rem; align-items: baseline; padding: clamp(1.3rem,2.4vw,1.9rem) 0; border-bottom: 1px solid var(--line-on-light); }
+.dark .eng-item { border-bottom-color: var(--line-on-dark); }
+.eng-item__t { font-family: var(--font-display); font-size: var(--fs-h3); line-height: 1.15; }
+.eng-item__meta { font-family: var(--font-mono); font-size: var(--fs-eyebrow); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--t-on-light-faint); }
+.dark .eng-item__meta { color: var(--t-on-dark-faint); }
+
+/* ============================================================================
+   29. FAMILY-OFFICE / HNWI INVITATION BAND (invitation-led, compliance-safe)
+   ============================================================================ */
+.invite { position: relative; overflow: hidden; }
+.invite__mark { position: absolute; right: -6%; top: 50%; transform: translateY(-50%); width: min(48vw,560px); aspect-ratio: 1; z-index: 0; opacity: 0.45; pointer-events: none; }
+.invite__mark svg { width: 100%; height: 100%; }
+.invite__inner { position: relative; z-index: 2; max-width: 62ch; }
+.invite__eyebrow { color: var(--accent-2-lit); }
+.invite__actions { margin-top: clamp(1.8rem,3vw,2.4rem); display: flex; flex-wrap: wrap; gap: 1rem 1.4rem; align-items: center; }
+
+/* ============================================================================
+   30. CONSENT (GDPR) checkbox
+   ============================================================================ */
+.consent { display: grid; grid-template-columns: auto 1fr; gap: 0.7rem; align-items: start; }
+.consent input[type="checkbox"] {
+  appearance: none; -webkit-appearance: none;
+  width: 1.05rem; height: 1.05rem; margin: 0.15rem 0 0;
+  border: 1px solid var(--line-on-light-2); border-radius: 3px;
+  background: transparent; cursor: pointer; position: relative; flex: none;
+}
+.dark .consent input[type="checkbox"] { border-color: var(--line-on-dark-2); }
+.consent input[type="checkbox"]:checked { background: var(--accent-1); border-color: var(--accent-1); }
+.dark .consent input[type="checkbox"]:checked { background: var(--accent-1-lit); border-color: var(--accent-1-lit); }
+.consent input[type="checkbox"]:checked::after {
+  content: ""; position: absolute; left: 0.32rem; top: 0.12rem;
+  width: 0.28rem; height: 0.55rem; border: solid var(--c-ivory); border-width: 0 2px 2px 0; transform: rotate(45deg);
+}
+.consent label { font-family: var(--font-sans); font-size: 0.8rem; line-height: 1.5; color: var(--t-on-light-soft); }
+.dark .consent label { color: var(--t-on-dark-soft); }
+.consent a { border-bottom: 1px solid currentColor; }
+
+</style>
+</head>
+<body>
+
+  
+  <header class="nav" data-scrolled="true">
+    <a class="wordmark" href="index.html" aria-label="MEHR Partners home">
+      MEHR<span class="wordmark__dot">·</span><span class="wordmark__tld">partners</span>
+    </a>
+    <button class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  
+  <nav class="menu" id="menu" aria-label="Primary">
+    <div class="menu__pattern" data-pattern="A" data-variant="calm" aria-hidden="true"></div>
+    <div class="menu__links">
+      <a href="index.html#serve"><span class="idx">01</span>Who We Serve</a>
+      <a href="index.html#work"><span class="idx">02</span>What We Do</a>
+      <a href="index.html#how"><span class="idx">03</span>How We Work</a>
+      <a href="index.html#partnerships"><span class="idx">04</span>Partnerships</a>
+      <a href="index.html#contact"><span class="idx">05</span>Contact</a>
+    </div>
+    <div class="menu__foot">
+      <span>MEHR Partners · Operator-Led Partnership</span>
+      <span>US · Europe · Gulf · Asia</span>
+      <a href="https://mehr.vc">mehr.vc&nbsp;→</a>
+    </div>
+  </nav>
+
+  
+  <main id="top">
+  <section class="subhero">
+    <div class="subhero__bg" data-pattern="A" data-variant="calm" aria-hidden="true"></div>
+    <div class="subhero__veil" aria-hidden="true"></div>
+    <div class="wrap subhero__inner">
+      <div class="subhero__crumbs"><a href="index.html">MEHR Partners</a> <span>/</span> <span>Privacy Notice</span></div>
+      <h1 class="subhero__title">Privacy Notice</h1>
+      <p class="subhero__sub">How we handle the information you share with us, and the rights you have over it.</p>
+    </div>
+  </section>
+  </main>
+
+  <section class="light section">
+    <div class="wrap">
+      <div class="legal reveal">
+        <p class="legal__meta">Last updated: 2026.</p>
+
+        <p>MEHR Partners ("MEHR", "we", "us") respects your privacy. This notice explains what personal information we collect when you contact us or use this website, why we collect it, how we use and protect it, and the rights you have. It is written to align with common data-protection standards, including the EU/UK GDPR.</p>
+
+        <h2>Who we are</h2>
+        <p>MEHR Partners is an operator-led partnership. For any question about this notice or your personal information, contact us at <a class="email-link" data-user="info" data-domain="mehrpartners.com" data-fill>info@mehrpartners.com</a>.</p>
+
+        <h2>What we collect</h2>
+        <p>We only collect what you choose to give us. When you complete our contact form or email us, that typically includes:</p>
+        <ul>
+          <li>Your name and email address</li>
+          <li>Your company or organisation, if you provide it</li>
+          <li>The content of your message and any details you share about your enquiry</li>
+          <li>Basic technical data your browser sends, and limited anti-spam signals used to protect the form</li>
+        </ul>
+
+        <h2>Why we use it, and our lawful basis</h2>
+        <p>We use your information solely to respond to your enquiry, to have the resulting conversation, and to provide any services you go on to engage us for. Where the GDPR applies, our lawful basis is your consent (given when you submit the form) and our legitimate interest in responding to business enquiries. We do not use your information for automated decision-making or profiling, and we do not sell it.</p>
+
+        <h2>Who we share it with</h2>
+        <p>We do not share your personal information with third parties for their own marketing. We may share it only with trusted service providers who help us operate, for example our form and email providers, and only so they can perform that service for us. We may also disclose information where we are legally required to do so.</p>
+
+        <h2>International transfers</h2>
+        <p>We operate across the United States, Europe, the Gulf, and Asia, and our service providers may process data outside your country. Where required, we rely on appropriate safeguards for such transfers.</p>
+
+        <h2>How long we keep it</h2>
+        <p>We keep enquiry information for as long as needed to handle your request and to maintain a reasonable record of our correspondence, then delete or anonymise it. If we begin a formal engagement, related records are retained under that engagement's agreement and applicable law.</p>
+
+        <h2>How we protect it</h2>
+        <p>We apply reasonable organisational and technical measures to protect your information, keep access limited to the partners, and use reputable providers for our website and communications.</p>
+
+        <h2>Your rights</h2>
+        <p>Depending on where you live, you may have the right to access the personal information we hold about you, to correct or delete it, to restrict or object to its use, to withdraw consent, and to data portability. To exercise any of these, email us at <a class="email-link" data-user="info" data-domain="mehrpartners.com" data-fill>info@mehrpartners.com</a> and we will respond within the timeframe required by applicable law. You may also lodge a complaint with your local data-protection authority.</p>
+
+        <h2>Cookies</h2>
+        <p>This site uses only what is necessary to function and to protect our contact form from abuse. We do not use advertising or cross-site tracking cookies.</p>
+
+        <h2>Changes</h2>
+        <p>We may update this notice from time to time. The current version is always the one published here.</p>
+
+        <p class="u-mt"><a class="link-underline" href="index.html">Return to mehrpartners.com</a></p>
+      </div>
+    </div>
+  </section>
+
+  
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer__bottom" style="margin-top:0;border-top:0">
+        <span>© 2026 MEHR Partners. All rights reserved.</span>
+        <span class="footer__sister"><a href="index.html">mehrpartners.com</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+/* ============================================================================
+   MEHR - girih.js
+   Persian geometric pattern generation + shared front-end behavior.
+   Shared by mehr.vc and mehrpartners.com.
+
+   Girih geometry note: the decagonal/pentagonal system is built on angles
+   that are multiples of 36 degrees and tied to the golden ratio (phi ~= 1.618).
+   Method A  = 8-point star (shamse) tiling texture for hero backgrounds.
+   Method B  = true 5-fold girih rosette, coordinates computed trigonometrically.
+   ============================================================================ */
+(function () {
+  "use strict";
+
+  var SVGNS = "http://www.w3.org/2000/svg";
+  var TAU = Math.PI * 2;
+  var d2r = function (d) { return (d * Math.PI) / 180; };
+
+  /* --------------------------------------------------------------------------
+     Geometry helpers
+     -------------------------------------------------------------------------- */
+  function ptOnCircle(cx, cy, r, angDeg) {
+    return [cx + r * Math.cos(d2r(angDeg)), cy + r * Math.sin(d2r(angDeg))];
+  }
+  function polygon(cx, cy, r, n, startDeg) {
+    var pts = [];
+    for (var i = 0; i < n; i++) pts.push(ptOnCircle(cx, cy, r, startDeg + (360 / n) * i));
+    return pts;
+  }
+  function pathFrom(pts, close) {
+    var d = "M " + pts[0][0].toFixed(2) + " " + pts[0][1].toFixed(2);
+    for (var i = 1; i < pts.length; i++) d += " L " + pts[i][0].toFixed(2) + " " + pts[i][1].toFixed(2);
+    if (close) d += " Z";
+    return d;
+  }
+  function mid(a, b) { return [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]; }
+
+  /* --------------------------------------------------------------------------
+     METHOD A - 8-point star (shamse) seamless tile
+     Two overlapping squares (0deg + 45deg) centered on the tile form the
+     8-pointed star; strapwork lines run to the tile edges so it tiles.
+     `variant`:  "angular"  (mehr.vc)     -> sharper star, added momentum lines
+                 "calm"     (partners)    -> symmetrical, quieter
+     -------------------------------------------------------------------------- */
+  function methodA(opts) {
+    opts = opts || {};
+    var stroke = opts.stroke || "var(--accent-1-lit)";
+    var stroke2 = opts.stroke2 || "var(--accent-2-lit)";
+    var variant = opts.variant || "angular";
+    var T = 120;               // tile size
+    var c = T / 2;             // center
+    var rOuter = T * 0.46;     // square circumradius (reaches near edges)
+    var rInner = T * 0.20;     // inner octagon radius
+
+    // Two squares -> 8-point star. Square = 4-gon; circumradius rOuter.
+    var sqA = polygon(c, c, rOuter, 4, 45);   // axis-aligned square (corners at 45)
+    var sqB = polygon(c, c, rOuter, 4, 0);    // rotated 45deg relative to A
+    var octa = polygon(c, c, rInner, 8, 22.5); // inner octagon hub
+
+    var sw = variant === "calm" ? 1.2 : 1.45;
+    var op1 = variant === "calm" ? 0.18 : 0.22;
+
+    var paths = "";
+    paths += '<path d="' + pathFrom(sqA, true) + '" fill="none" stroke="' + stroke + '" stroke-width="' + sw + '" opacity="' + op1 + '"/>';
+    paths += '<path d="' + pathFrom(sqB, true) + '" fill="none" stroke="' + stroke + '" stroke-width="' + sw + '" opacity="' + op1 + '"/>';
+    paths += '<path d="' + pathFrom(octa, true) + '" fill="none" stroke="' + stroke2 + '" stroke-width="' + (sw * 0.85) + '" opacity="' + (op1 * 0.9) + '"/>';
+
+    // Strapwork: connect the 8 star points toward the 4 edge midpoints so the
+    // motif interlocks with neighbouring tiles.
+    var edgeMids = [[c, 0], [T, c], [c, T], [0, c]];
+    var starPts = polygon(c, c, rOuter, 8, 0); // 8 outer directions
+    var strap = "";
+    for (var i = 0; i < edgeMids.length; i++) {
+      var em = edgeMids[i];
+      strap += '<line x1="' + em[0] + '" y1="' + em[1] + '" x2="' + c + '" y2="' + c + '" stroke="' + stroke + '" stroke-width="' + (sw * 0.6) + '" opacity="' + (op1 * 0.55) + '"/>';
+    }
+
+    // Angular variant adds diagonal momentum lines corner-to-corner.
+    var extra = "";
+    if (variant === "angular") {
+      extra += '<line x1="0" y1="0" x2="' + T + '" y2="' + T + '" stroke="' + stroke2 + '" stroke-width="0.6" opacity="0.06"/>';
+      extra += '<line x1="' + T + '" y1="0" x2="0" y2="' + T + '" stroke="' + stroke2 + '" stroke-width="0.6" opacity="0.06"/>';
+    }
+
+    var svg =
+      '<svg xmlns="' + SVGNS + '" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true">' +
+        '<defs>' +
+          '<pattern id="mehrA_' + variant + '" width="' + T + '" height="' + T + '" patternUnits="userSpaceOnUse" patternTransform="rotate(' + (variant === "calm" ? 0 : 0) + ')">' +
+            strap + paths + extra +
+          '</pattern>' +
+        '</defs>' +
+        '<rect x="-20" y="-20" width="140" height="140" fill="url(#mehrA_' + variant + ')"/>' +
+      '</svg>';
+    return svg;
+  }
+
+  /* --------------------------------------------------------------------------
+     METHOD B - true 5-fold girih rosette (single watermark, not a texture)
+     Central decagon; 10 vertices at 36*n; a ring of pentagons attached on the
+     shared edges; only internal strapwork lines drawn (not tile outlines).
+     -------------------------------------------------------------------------- */
+  function methodB(opts) {
+    opts = opts || {};
+    var stroke = opts.stroke || "var(--accent-1-lit)";
+    var stroke2 = opts.stroke2 || "var(--accent-2-lit)";
+    var S = 600;
+    var c = S / 2;
+    var R = S * 0.30;          // decagon circumradius
+    var start = -90;           // point-up
+    var sw = opts.strokeWidth || 1.4;
+
+    var deca = polygon(c, c, R, 10, start);          // 10 outer vertices
+    var frag = "";
+
+    // --- Central strapwork: interlaced decagrams {10/3} and {10/4} ---
+    function starPoly(step) {
+      // connect vertex i -> i+step around the decagon
+      var order = [];
+      var idx = 0;
+      for (var k = 0; k < 10; k++) { order.push(deca[idx]); idx = (idx + step) % 10; }
+      return order;
+    }
+    frag += '<path d="' + pathFrom(starPoly(3), true) + '" fill="none" stroke="' + stroke + '" stroke-width="' + sw + '"/>';
+    frag += '<path d="' + pathFrom(starPoly(4), true) + '" fill="none" stroke="' + stroke + '" stroke-width="' + sw + '" opacity="0.7"/>';
+
+    // inner decagon + inner rosette
+    var decaIn = polygon(c, c, R * 0.5, 10, start);
+    frag += '<path d="' + pathFrom(decaIn, true) + '" fill="none" stroke="' + stroke2 + '" stroke-width="' + (sw * 0.9) + '" opacity="0.8"/>';
+    var decaInStar = (function () {
+      var order = [], idx = 0;
+      for (var k = 0; k < 10; k++) { order.push(decaIn[idx]); idx = (idx + 3) % 10; }
+      return order;
+    })();
+    frag += '<path d="' + pathFrom(decaInStar, true) + '" fill="none" stroke="' + stroke2 + '" stroke-width="' + (sw * 0.8) + '" opacity="0.6"/>';
+
+    // --- Ring of pentagons attached to each decagon edge (equal edge length) ---
+    var edgeLen = Math.hypot(deca[1][0] - deca[0][0], deca[1][1] - deca[0][1]);
+    // regular pentagon circumradius for that edge length
+    var pentR = edgeLen / (2 * Math.sin(Math.PI / 5));
+    for (var e = 0; e < 10; e++) {
+      var a = deca[e];
+      var b = deca[(e + 1) % 10];
+      var m = mid(a, b);
+      // outward normal direction from center through edge midpoint
+      var ang = Math.atan2(m[1] - c, m[0] - c);
+      // pentagon centroid sits outside the edge along the normal
+      var apoth = pentR * Math.cos(Math.PI / 5);
+      var pc = [m[0] + Math.cos(ang) * apoth, m[1] + Math.sin(ang) * apoth];
+      // pentagon pointing outward
+      var pent = polygon(pc[0], pc[1], pentR, 5, (ang * 180) / Math.PI);
+      // draw only internal strapwork of the pentagon (pentagram)
+      var pentStar = [pent[0], pent[2], pent[4], pent[1], pent[3]];
+      frag += '<path d="' + pathFrom(pentStar, true) + '" fill="none" stroke="' + stroke + '" stroke-width="' + (sw * 0.75) + '" opacity="0.55"/>';
+      // short strap connecting rosette to pentagon
+      frag += '<line x1="' + m[0].toFixed(2) + '" y1="' + m[1].toFixed(2) + '" x2="' + pc[0].toFixed(2) + '" y2="' + pc[1].toFixed(2) + '" stroke="' + stroke2 + '" stroke-width="' + (sw * 0.6) + '" opacity="0.4"/>';
+    }
+
+    // outermost guide decagon (very faint), ties the ring together
+    var decaOut = polygon(c, c, R + pentR * 1.35, 10, start);
+    frag += '<path d="' + pathFrom(decaOut, true) + '" fill="none" stroke="' + stroke2 + '" stroke-width="' + (sw * 0.6) + '" opacity="0.22"/>';
+
+    return '<svg xmlns="' + SVGNS + '" viewBox="0 0 ' + S + ' ' + S + '" aria-hidden="true">' + frag + '</svg>';
+  }
+
+  /* --------------------------------------------------------------------------
+     INJECT PATTERNS
+     -------------------------------------------------------------------------- */
+  function injectPatterns() {
+    document.querySelectorAll("[data-pattern='A']").forEach(function (el) {
+      el.innerHTML = methodA({ variant: el.getAttribute("data-variant") || "angular" });
+    });
+    document.querySelectorAll("[data-pattern='B']").forEach(function (el) {
+      el.innerHTML = methodB({});
+    });
+  }
+
+  /* --------------------------------------------------------------------------
+     SCROLL REVEALS (IntersectionObserver)
+     -------------------------------------------------------------------------- */
+  function initReveals() {
+    var els = document.querySelectorAll(".reveal");
+    if (!("IntersectionObserver" in window)) {
+      els.forEach(function (e) { e.classList.add("in"); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.16, rootMargin: "0px 0px -8% 0px" });
+    els.forEach(function (e) { io.observe(e); });
+  }
+
+  /* --------------------------------------------------------------------------
+     COUNT-UP for stats
+     -------------------------------------------------------------------------- */
+  function animateCount(el) {
+    var target = parseFloat(el.getAttribute("data-count"));
+    var decimals = parseInt(el.getAttribute("data-decimals") || "0", 10);
+    var dur = 1600;
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) { el.textContent = target.toFixed(decimals); return; }
+    var startT = null;
+    function frame(t) {
+      if (startT === null) startT = t;
+      var p = Math.min((t - startT) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = (target * eased).toFixed(decimals);
+      if (p < 1) requestAnimationFrame(frame);
+      else el.textContent = target.toFixed(decimals);
+    }
+    requestAnimationFrame(frame);
+  }
+  function initCounts() {
+    var nums = document.querySelectorAll("[data-count]");
+    if (!("IntersectionObserver" in window)) { nums.forEach(animateCount); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { animateCount(en.target); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.6 });
+    nums.forEach(function (n) { io.observe(n); });
+  }
+
+  /* --------------------------------------------------------------------------
+     NAV: scroll state + menu toggle + staggered link reveal
+     -------------------------------------------------------------------------- */
+  function initNav() {
+    var nav = document.querySelector(".nav");
+    var burger = document.querySelector(".burger");
+    var menu = document.querySelector(".menu");
+    var links = menu ? menu.querySelectorAll(".menu__links a") : [];
+
+    // stagger delays
+    links.forEach(function (a, i) { a.style.transitionDelay = (0.18 + i * 0.07) + "s"; });
+
+    if (nav) {
+      var onScroll = function () { nav.setAttribute("data-scrolled", window.scrollY > 24 ? "true" : "false"); };
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+    }
+    function toggle(force) {
+      var open = force !== undefined ? force : !document.body.classList.contains("menu-open");
+      document.body.classList.toggle("menu-open", open);
+      if (burger) burger.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+    if (burger) burger.addEventListener("click", function () { toggle(); });
+    if (menu) menu.querySelectorAll("a").forEach(function (a) {
+      a.addEventListener("click", function () { toggle(false); });
+    });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") toggle(false); });
+  }
+
+  /* --------------------------------------------------------------------------
+     CINEMATIC HERO - staged reveal on load + subtle pointer parallax
+     -------------------------------------------------------------------------- */
+  function initHero() {
+    var hero = document.querySelector(".hero--cinematic");
+    if (!hero) return;
+    // trigger the kinetic reveal shortly after paint
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () { hero.classList.add("is-ready"); });
+    });
+
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce || !window.matchMedia("(pointer:fine)").matches) return;
+
+    var layers = hero.querySelectorAll("[data-parallax]");
+    if (!layers.length) return;
+    var tx = 0, ty = 0, cx = 0, cy = 0, raf = null;
+    hero.addEventListener("mousemove", function (e) {
+      var r = hero.getBoundingClientRect();
+      tx = (e.clientX - r.left) / r.width - 0.5;   // -0.5..0.5
+      ty = (e.clientY - r.top) / r.height - 0.5;
+      if (!raf) raf = requestAnimationFrame(tick);
+    });
+    hero.addEventListener("mouseleave", function () { tx = 0; ty = 0; if (!raf) raf = requestAnimationFrame(tick); });
+    function tick() {
+      cx += (tx - cx) * 0.06; cy += (ty - cy) * 0.06;
+      layers.forEach(function (l) {
+        var d = parseFloat(l.getAttribute("data-parallax")) || 0.03;
+        l.style.transform = "translate3d(" + (-cx * d * 100).toFixed(2) + "px," + (-cy * d * 100).toFixed(2) + "px,0)";
+      });
+      if (Math.abs(tx - cx) > 0.001 || Math.abs(ty - cy) > 0.001) raf = requestAnimationFrame(tick);
+      else raf = null;
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     EMAIL OBFUSCATION - assemble address in JS so scrapers never see plaintext.
+     Markup: <a class="email-link" data-user="info" data-domain="mehrpartners.com">…</a>
+     -------------------------------------------------------------------------- */
+  function initEmailObfuscation() {
+    document.querySelectorAll("[data-user][data-domain]").forEach(function (el) {
+      var addr = el.getAttribute("data-user") + "@" + el.getAttribute("data-domain");
+      if (el.tagName === "A") {
+        el.setAttribute("href", "mailto:" + addr);
+        if (!el.textContent.trim() || el.hasAttribute("data-fill")) el.textContent = addr;
+      } else {
+        el.textContent = addr;
+      }
+    });
+  }
+
+  /* --------------------------------------------------------------------------
+     CONTACT FORM - honeypot + Turnstile-aware + endpoint POST.
+     Two things to configure before launch (see the HTML comments):
+       1. form.action  -> your form endpoint (Formspree / Web3Forms / Cloudflare)
+       2. Turnstile site key on the .cf-turnstile element
+     -------------------------------------------------------------------------- */
+  function initContactForm() {
+    var form = document.querySelector(".contact-form");
+    if (!form) return;
+    var statusEl = form.querySelector(".form__status");
+    var submitBtn = form.querySelector("[type='submit']");
+
+    function setStatus(msg, state) {
+      if (!statusEl) return;
+      statusEl.textContent = msg;
+      statusEl.setAttribute("data-state", state || "");
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      // 1. Honeypot - if filled, it's a bot. Pretend success, send nothing.
+      var hp = form.querySelector(".hp-field input");
+      if (hp && hp.value.trim() !== "") { setStatus("Thanks - we'll be in touch.", "ok"); form.reset(); return; }
+
+      // 2. Basic validation
+      var email = form.querySelector("[name='email']");
+      if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value)) {
+        setStatus("Please enter a valid email address.", "err"); email.focus(); return;
+      }
+      var consent = form.querySelector("[name='consent']");
+      if (consent && !consent.checked) {
+        setStatus("Please agree to be contacted before sending.", "err"); return;
+      }
+
+      // 3. Turnstile token (if the widget is configured)
+      var needsCaptcha = form.querySelector(".cf-turnstile");
+      var token = form.querySelector("[name='cf-turnstile-response']");
+      if (needsCaptcha && needsCaptcha.getAttribute("data-sitekey") &&
+          needsCaptcha.getAttribute("data-sitekey").indexOf("YOUR_") === -1 &&
+          (!token || !token.value)) {
+        setStatus("Please complete the anti-spam check.", "err"); return;
+      }
+
+      // 4. Endpoint check - guard the pre-launch placeholders
+      var action = form.getAttribute("action") || "";
+      var keyEl = form.querySelector("[name='access_key']");
+      var placeholderKey = keyEl && keyEl.value.indexOf("YOUR_") !== -1;
+      if (action.indexOf("REPLACE_WITH_") !== -1 || action === "" || action === "#" || placeholderKey) {
+        setStatus("Form is ready. Add your Web3Forms access key (see code comment) to enable sending.", "err");
+        return;
+      }
+
+      // 5. Submit
+      if (submitBtn) submitBtn.setAttribute("disabled", "true");
+      setStatus("Sending…", "");
+      fetch(action, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } })
+        .then(function (r) {
+          if (r.ok) { setStatus("Thanks - your message is on its way. We'll reply from info@mehrpartners.com.", "ok"); form.reset(); if (window.turnstile) window.turnstile.reset(); }
+          else { setStatus("Something went wrong. Please email us directly.", "err"); }
+        })
+        .catch(function () { setStatus("Network error. Please email us directly.", "err"); })
+        .finally(function () { if (submitBtn) submitBtn.removeAttribute("disabled"); });
+    });
+  }
+
+  /* --------------------------------------------------------------------------
+     BOOT
+     -------------------------------------------------------------------------- */
+  function boot() {
+    injectPatterns();
+    initReveals();
+    initCounts();
+    initNav();
+    initHero();
+    initEmailObfuscation();
+    initContactForm();
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+
+  // expose for previews / debugging
+  window.MEHR = { methodA: methodA, methodB: methodB };
+})();
+
+</script>
+</body>
+</html>
